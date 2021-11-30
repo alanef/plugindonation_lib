@@ -5,10 +5,12 @@ namespace AlanEFPluginDonation;
 class PluginDonation {
 	protected $plugin_slug;
 	protected $settings_hook;
+	protected $plugin_file;
 
-	public function __construct( $plugin_slug, $settings_hook ) {
+	public function __construct( $plugin_slug, $settings_hook, $plugin_file ) {
 		$this->plugin_slug   = $plugin_slug;
 		$this->settings_hook = $settings_hook;
+		$this->plugin_file   = $plugin_file;
 		$this->hooks();
 	}
 
@@ -16,6 +18,37 @@ class PluginDonation {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'plugins_loaded', array( $this, 'languages' ) );
+		register_activation_hook( $this->plugin_file, array( $this, 'plugin_activate' ) );
+		register_uninstall_hook(
+			$this->plugin_file,
+			array(
+				'\AlanEFPluginDonation\PluginDonation',
+				'plugin_uninstall',
+			)
+		);
+	}
+
+	public static function plugin_uninstall() {
+		$x = plugin_basename( __FILE__ );
+		do {
+			$slug = $x;
+			$x    = dirname( $x );
+		} while ( ! empty( $x ) && '.' !== $x );
+
+		delete_option( $slug . '_donate' );
+		delete_option( $slug . '_review' );
+	}
+
+	public function plugin_activate() {
+		$donate = get_option( $this->plugin_slug . '_donate', false );
+		if ( false === $donate ) {
+			add_option( $this->plugin_slug . '_donate', time() );
+		}
+		$review = get_option( $this->plugin_slug . '_review', false );
+		if ( false === $review ) {
+			add_option( $this->plugin_slug . '_review', time() );
+		}
+
 	}
 
 	public function languages() {
@@ -161,7 +194,7 @@ EOT;
                 </div>
                 <div>
 					<?php esc_html_e( 'My Bitcoin donation wallet', 'plugin-donation-lib' ); ?><br><br> <strong><a
-                            href="https://www.blockchain.com/btc/address/bc1q04zt3yxxu282ayg3aev633twpqtw0dzzetp78x">bc1q04zt3yxxu282ayg3aev633twpqtw0dzzetp78x</a></strong>
+                                href="https://www.blockchain.com/btc/address/bc1q04zt3yxxu282ayg3aev633twpqtw0dzzetp78x">bc1q04zt3yxxu282ayg3aev633twpqtw0dzzetp78x</a></strong>
                 </div>
                 <div>
                     <img height="140"
@@ -170,22 +203,23 @@ EOT;
             </div>
             <div id="PP" class="tabcontent">
                 <div><a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q"
-                      target="_blank"><img height="48"
-                                           src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/PP.png' ?>">
+                        target="_blank"><img height="48"
+                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/PP.png' ?>">
                     </a></div>
                 <div><a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q"
-                      target="_blank"><?php esc_html_e( 'Gift a donation via PayPal', 'plugin-donation-lib' ); ?>
+                        target="_blank"><?php esc_html_e( 'Gift a donation via PayPal', 'plugin-donation-lib' ); ?>
                     </a></div>
                 <div><a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q"
-                      target="_blank"><img height="48"
-                                           src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/PPcards.png' ?>">
+                        target="_blank"><img height="48"
+                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/PPcards.png' ?>">
                     </a></div>
             </div>
             <div id="BCH" class="tabcontent">
                 <div><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BCH.png' ?>">Bitcoin
-                    Cash</div>
+                    Cash
+                </div>
                 <div>
-		            <?php esc_html_e( 'My Bitcoin Cash address', 'plugin-donation-lib' ); ?><br><br><strong>bitcoincash:qpmn76wad2mwfhk3c9vhx77ex5nqhq2r0ursp8z6mp</strong>
+					<?php esc_html_e( 'My Bitcoin Cash address', 'plugin-donation-lib' ); ?><br><br><strong>bitcoincash:qpmn76wad2mwfhk3c9vhx77ex5nqhq2r0ursp8z6mp</strong>
                 </div>
                 <div>
                     <img height="140"
@@ -197,7 +231,7 @@ EOT;
                 <div><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/ETH.png' ?>">Ethereum
                 </div>
                 <div>
-		            <?php esc_html_e( 'My Ethereum address', 'plugin-donation-lib' ); ?><br><br><strong>0x492Bdf65bcB65bC067Ab3886e9B79a7CDe9021BB</strong>
+					<?php esc_html_e( 'My Ethereum address', 'plugin-donation-lib' ); ?><br><br><strong>0x492Bdf65bcB65bC067Ab3886e9B79a7CDe9021BB</strong>
                 </div>
                 <div>
                     <img height="140"
@@ -208,7 +242,7 @@ EOT;
                 <h3><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/DOGE.png' ?>">Dogecoin
                 </h3>
                 <div>
-		            <?php esc_html_e( 'My Dogecoin address', 'plugin-donation-lib' ); ?><br><br><strong>D7nB2HsBxNPACis9fSgjqTShe4JfSztAjr</strong>
+					<?php esc_html_e( 'My Dogecoin address', 'plugin-donation-lib' ); ?><br><br><strong>D7nB2HsBxNPACis9fSgjqTShe4JfSztAjr</strong>
                 </div>
                 <div>
                     <img height="140"
@@ -222,7 +256,7 @@ EOT;
         </p>
         <p>
             <a class="button-secondary"
-               href="https://wordpress.org/support/plugin/<?php echo esc_attr($this->plugin_slug);?>/reviews/?view=all#new-post"
+               href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/reviews/?view=all#new-post"
                target="_blank"><?php esc_html_e( 'SUBMIT A REVIEW', 'plugin-donation-lib' ); ?></a>
         </p>
         <p>
@@ -230,7 +264,7 @@ EOT;
         </p>
         <p>
             <a class="button-secondary"
-               href="https://translate.wordpress.org/projects/wp-plugins/<?php echo esc_attr($this->plugin_slug);?>/"
+               href="https://translate.wordpress.org/projects/wp-plugins/<?php echo esc_attr( $this->plugin_slug ); ?>/"
                target="_blank"><?php esc_html_e( 'TRANSLATE INTO YOUR LANGUAGE', 'plugin-donation-lib' ); ?></a>
         </p>
 		<?php
