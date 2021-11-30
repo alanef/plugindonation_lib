@@ -222,7 +222,7 @@ EOT;
         </p>
         <p>
             <a class="button-secondary"
-               href="https://wordpress.org/support/plugin/plugin-donation-lib/reviews/?view=all#new-post"
+               href="https://wordpress.org/support/plugin/<?php echo esc_attr($this->plugin_slug);?>/reviews/?view=all#new-post"
                target="_blank"><?php esc_html_e( 'SUBMIT A REVIEW', 'plugin-donation-lib' ); ?></a>
         </p>
         <p>
@@ -230,7 +230,7 @@ EOT;
         </p>
         <p>
             <a class="button-secondary"
-               href="https://translate.wordpress.org/projects/wp-plugins/plugin-donation-lib/"
+               href="https://translate.wordpress.org/projects/wp-plugins/<?php echo esc_attr($this->plugin_slug);?>/"
                target="_blank"><?php esc_html_e( 'TRANSLATE INTO YOUR LANGUAGE', 'plugin-donation-lib' ); ?></a>
         </p>
 		<?php
