@@ -269,7 +269,8 @@ EOT;
                                                                                                src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/translate.png' ?>"><br><?php esc_html_e( 'Translate to your language', 'plugin-donation-lib' ); ?>
                     </button>
                     <button class="tablinks" onclick="openCrypto(event, 'github-tab')"><img height="32"
-                                                                                            src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/github.png' ?>"><br>Help Develop
+                                                                                            src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/github.png' ?>"><br>Help
+                        Develop
                     </button>
                 </div>
                 <!-- Tab content -->
@@ -281,7 +282,7 @@ EOT;
                                target="_blank"><?php esc_html_e( 'SUBMIT A REVIEW', 'plugin-donation-lib' ); ?></a>
                         </div>
                         <div>
-                            <p><?php esc_html_e('If you are happy with the plugin the we would love a review. Even if you are not so happy feedback is always useful, but if you have issues we would love you to make a support request fist so we can try and help.', 'plugin-donation-lib' ); ?></p>
+                            <p><?php esc_html_e( 'If you are happy with the plugin the we would love a review. Even if you are not so happy feedback is always useful, but if you have issues we would love you to make a support request fist so we can try and help.', 'plugin-donation-lib' ); ?></p>
                         </div>
                         <div>
                             <a class="button-secondary"
@@ -305,10 +306,11 @@ EOT;
                     </div>
                     <div id="github-tab" class="tabcontent">
                         <div><a href="https://github.com/alanef/<?php echo esc_attr( $this->plugin_slug ); ?>/"
-                                target="_blank"><?php esc_html_e( 'CONTRIBUTE ON GITHUB', 'plugin-donation-lib' ); ?><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/github.png' ?>"></a>
+                                target="_blank"><img height="48"
+                                                     src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/github.png' ?>"></a>
                         </div>
                         <div>
-                            <p><?php esc_html_e('As an open source project you are welcome to contribute to the development of the software if you can. The development plugin is hosted on GitHub.', 'plugin-donation-lib' ); ?></p>
+                            <p><?php esc_html_e( 'As an open source project you are welcome to contribute to the development of the software if you can. The development plugin is hosted on GitHub.', 'plugin-donation-lib' ); ?></p>
                         </div>
                         <div>
                             <a class="button-secondary"
@@ -322,12 +324,12 @@ EOT;
         </tr>
         <tr valign="top">
             <th scope="row"><?php esc_html_e( 'Get Support', 'plugin-donation-lib' ); ?></th>
-            <a class="button-secondary"
-               href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/"
-               target="_blank"><?php esc_html_e( 'WORDPRESS SUPPORT FORUM', 'plugin-donation-lib' ); ?></a>
             <td>
+                <a class="button-secondary"
+                   href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/"
+                   target="_blank"><?php esc_html_e( 'WORDPRESS SUPPORT FORUM', 'plugin-donation-lib' ); ?></a>
             </td>
-        <tr></tr>
+        </tr>
 		<?php
 	}
 }
