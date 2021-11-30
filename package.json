@@ -7,7 +7,5 @@
     "gulp-wp-pot": "latest"
   },
   "name": "plugindonation_lib",
-  "version": "1.0.0",
-  "dependencies": {
-  }
+  "version": "1.0.0"
 }

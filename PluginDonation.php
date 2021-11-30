@@ -70,6 +70,15 @@ class PluginDonation {
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+}
+.tabcontent div {
+  flex-grow: 1;
+}
+div.tabcontentwrap div:first-child{
+  display: flex;
 }
 EOT;
 
@@ -105,7 +114,7 @@ function openCrypto(evt, cryptName) {
      }
 
      // Show the current tab, and add an "active" class to the button that opened the tab
-     document.getElementById(cryptName).style.display = "block";
+     document.getElementById(cryptName).style.display = "flex";
      evt.currentTarget.className += " active";
 }
 EOT;
@@ -120,59 +129,94 @@ EOT;
         <p>
 			<?php esc_html_e( 'It would really help me know that others find it useful and a great way of doing this is to gift me a small donation', 'plugin-donation-lib' ); ?>
         </p>
-        <h2>
-			<?php esc_html_e( 'Gift a donation anoymously via  Crypto currency', 'plugin-donation-lib' ); ?>
-        </h2>
+        <h3>
+			<?php esc_html_e( 'Gift a donation: select your desired option', 'plugin-donation-lib' ); ?>
+        </h3>
         <!-- Tab links -->
         <div class="tab">
             <button class="tablinks" onclick="openCrypto(event, 'BTC')"><img height="32"
-                                                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/crypto/logos/BTC.png' ?>">
+                                                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BTC.png' ?>">
+            </button>
+            <button class="tablinks" onclick="openCrypto(event, 'PP')"><img height="32"
+                                                                            src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/PP.png' ?>">
             </button>
             <button class="tablinks" onclick="openCrypto(event, 'BCH')"><img height="32"
-                                                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/crypto/logos/BCH.png' ?>">Bitcoin
+                                                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BCH.png' ?>">Bitcoin
                 Cash
             </button>
             <button class="tablinks" onclick="openCrypto(event, 'ETH')"><img height="32"
-                                                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/crypto/logos/ETH.png' ?>">Ethereum
+                                                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/ETH.png' ?>">Ethereum
             </button>
             <button class="tablinks" onclick="openCrypto(event, 'DOGE')"><img height="32"
-                                                                              src="<?php echo plugin_dir_url( __FILE__ ) . 'images/crypto/logos/DOGE.png' ?>">Dogecoin
+                                                                              src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/DOGE.png' ?>">Dogecoin
             </button>
+
         </div>
 
         <!-- Tab content -->
-        <div id="BTC" class="tabcontent">
-            <img style="float:right;" height="100"
-                 src="<?php echo plugin_dir_url( __FILE__ ) . 'images/crypto/logos/BTC.png' ?>">
-            <h3><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/crypto/logos/BTC.png' ?>"></h3>
-            <p>My Bitcoin donation wallet <a
-                        href="https://www.blockchain.com/btc/address/bc1quhlwkyfnlcsc0ldd2dcvhqwlhqj7ll3vxz97er">bc1quhlwkyfnlcsc0ldd2dcvhqwlhqj7ll3vxz97er</a>
-            </p>
-        </div>
-        <div id="BCH" class="tabcontent">
-            <h3><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/crypto/logos/BCH.png' ?>">Bitcoin
-                Cash</h3>
-            <p>London is the capital city of England.</p>
-        </div>
+        <div class="tabcontentwrap">
+            <div id="BTC" class="tabcontent">
+                <div>
+                    <img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BTC.png' ?>">
+                </div>
+                <div>
+					<?php esc_html_e( 'My Bitcoin donation wallet', 'plugin-donation-lib' ); ?><br><br> <strong><a
+                            href="https://www.blockchain.com/btc/address/bc1q04zt3yxxu282ayg3aev633twpqtw0dzzetp78x">bc1q04zt3yxxu282ayg3aev633twpqtw0dzzetp78x</a></strong>
+                </div>
+                <div>
+                    <img height="140"
+                         src="<?php echo plugin_dir_url( __FILE__ ) . 'images/QRcodes/BTC.png' ?>">
+                </div>
+            </div>
+            <div id="PP" class="tabcontent">
+                <div><a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q"
+                      target="_blank"><img height="48"
+                                           src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/PP.png' ?>">
+                    </a></div>
+                <div><a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q"
+                      target="_blank"><?php esc_html_e( 'Gift a donation via PayPal', 'plugin-donation-lib' ); ?>
+                    </a></div>
+                <div><a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q"
+                      target="_blank"><img height="48"
+                                           src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/PPcards.png' ?>">
+                    </a></div>
+            </div>
+            <div id="BCH" class="tabcontent">
+                <div><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BCH.png' ?>">Bitcoin
+                    Cash</div>
+                <div>
+		            <?php esc_html_e( 'My Bitcoin Cash address', 'plugin-donation-lib' ); ?><br><br><strong>bitcoincash:qpmn76wad2mwfhk3c9vhx77ex5nqhq2r0ursp8z6mp</strong>
+                </div>
+                <div>
+                    <img height="140"
+                         src="<?php echo plugin_dir_url( __FILE__ ) . 'images/QRcodes/BCH.png' ?>">
+                </div>
+            </div>
 
-        <div id="ETH" class="tabcontent">
-            <h3><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/crypto/logos/ETH.png' ?>">Ethereum
-            </h3>
-            <p>Paris is the capital of France.</p>
+            <div id="ETH" class="tabcontent">
+                <div><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/ETH.png' ?>">Ethereum
+                </div>
+                <div>
+		            <?php esc_html_e( 'My Ethereum address', 'plugin-donation-lib' ); ?><br><br><strong>0x492Bdf65bcB65bC067Ab3886e9B79a7CDe9021BB</strong>
+                </div>
+                <div>
+                    <img height="140"
+                         src="<?php echo plugin_dir_url( __FILE__ ) . 'images/QRcodes/ETH.png' ?>">
+                </div>
+            </div>
+            <div id="DOGE" class="tabcontent">
+                <h3><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/DOGE.png' ?>">Dogecoin
+                </h3>
+                <div>
+		            <?php esc_html_e( 'My Dogecoin address', 'plugin-donation-lib' ); ?><br><br><strong>D7nB2HsBxNPACis9fSgjqTShe4JfSztAjr</strong>
+                </div>
+                <div>
+                    <img height="140"
+                         src="<?php echo plugin_dir_url( __FILE__ ) . 'images/QRcodes/DOGE.png' ?>">
+                </div>
+            </div>
         </div>
-
-        <div id="DOGE" class="tabcontent">
-            <h3><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/crypto/logos/DOGE.png' ?>">Dogecoin
-            </h3>
-            <p>Tokyo is the capital of Japan.</p>
-        </div>
-        <h2>
-			<?php esc_html_e( 'Gift a donation via PayPal', 'plugin-donation-lib' ); ?>
-        </h2>
-        <p>
-            <a class="button-primary" href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q"
-               target="_blank"><?php esc_html_e( 'PAYPAL DONATE LINK', 'plugin-donation-lib' ); ?></a>
-        </p>
+        <h3><?php esc_html_e( 'Contribute top the project in other ways', 'plugin-donation-lib' ); ?></h3>
         <p>
 			<?php esc_html_e( 'If it worked well for you, why not share that with the community through a review?', 'plugin-donation-lib' ); ?>
         </p>
