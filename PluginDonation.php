@@ -110,6 +110,9 @@ class PluginDonation {
 .tabcontent div {
   flex-grow: 1;
 }
+.tabcontent div:nth-of-type(2) {
+  flex-basis: 250px;
+}
 div.tabcontentwrap div:first-child{
   display: flex;
 }
@@ -156,117 +159,177 @@ EOT;
 
 	public function display() {
 		?>
-        <p>
-			<?php esc_html_e( 'Hi, I\'m Alan and I built this free plugin to solve problems I had, and I hope it solves your problem too.', 'plugin-donation-lib' ); ?>
-        </p>
-        <p>
-			<?php esc_html_e( 'It would really help me know that others find it useful and a great way of doing this is to gift me a small donation', 'plugin-donation-lib' ); ?>
-        </p>
-        <h3>
-			<?php esc_html_e( 'Gift a donation: select your desired option', 'plugin-donation-lib' ); ?>
-        </h3>
-        <!-- Tab links -->
-        <div class="tab">
-            <button class="tablinks" onclick="openCrypto(event, 'BTC')"><img height="32"
-                                                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BTC.png' ?>">
-            </button>
-            <button class="tablinks" onclick="openCrypto(event, 'PP')"><img height="32"
-                                                                            src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/PP.png' ?>">
-            </button>
-            <button class="tablinks" onclick="openCrypto(event, 'BCH')"><img height="32"
-                                                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BCH.png' ?>">Bitcoin
-                Cash
-            </button>
-            <button class="tablinks" onclick="openCrypto(event, 'ETH')"><img height="32"
-                                                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/ETH.png' ?>">Ethereum
-            </button>
-            <button class="tablinks" onclick="openCrypto(event, 'DOGE')"><img height="32"
-                                                                              src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/DOGE.png' ?>">Dogecoin
-            </button>
-
-        </div>
-
-        <!-- Tab content -->
-        <div class="tabcontentwrap">
-            <div id="BTC" class="tabcontent">
-                <div>
-                    <img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BTC.png' ?>">
-                </div>
-                <div>
-					<?php esc_html_e( 'My Bitcoin donation wallet', 'plugin-donation-lib' ); ?><br><br> <strong><a
-                                href="https://www.blockchain.com/btc/address/bc1q04zt3yxxu282ayg3aev633twpqtw0dzzetp78x">bc1q04zt3yxxu282ayg3aev633twpqtw0dzzetp78x</a></strong>
-                </div>
-                <div>
-                    <img height="140"
-                         src="<?php echo plugin_dir_url( __FILE__ ) . 'images/QRcodes/BTC.png' ?>">
-                </div>
-            </div>
-            <div id="PP" class="tabcontent">
-                <div><a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q"
-                        target="_blank"><img height="48"
-                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/PP.png' ?>">
-                    </a></div>
-                <div><a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q"
-                        target="_blank"><?php esc_html_e( 'Gift a donation via PayPal', 'plugin-donation-lib' ); ?>
-                    </a></div>
-                <div><a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q"
-                        target="_blank"><img height="48"
-                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/PPcards.png' ?>">
-                    </a></div>
-            </div>
-            <div id="BCH" class="tabcontent">
-                <div><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BCH.png' ?>">Bitcoin
-                    Cash
-                </div>
-                <div>
-					<?php esc_html_e( 'My Bitcoin Cash address', 'plugin-donation-lib' ); ?><br><br><strong>bitcoincash:qpmn76wad2mwfhk3c9vhx77ex5nqhq2r0ursp8z6mp</strong>
-                </div>
-                <div>
-                    <img height="140"
-                         src="<?php echo plugin_dir_url( __FILE__ ) . 'images/QRcodes/BCH.png' ?>">
-                </div>
-            </div>
-
-            <div id="ETH" class="tabcontent">
-                <div><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/ETH.png' ?>">Ethereum
-                </div>
-                <div>
-					<?php esc_html_e( 'My Ethereum address', 'plugin-donation-lib' ); ?><br><br><strong>0x492Bdf65bcB65bC067Ab3886e9B79a7CDe9021BB</strong>
-                </div>
-                <div>
-                    <img height="140"
-                         src="<?php echo plugin_dir_url( __FILE__ ) . 'images/QRcodes/ETH.png' ?>">
-                </div>
-            </div>
-            <div id="DOGE" class="tabcontent">
-                <h3><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/DOGE.png' ?>">Dogecoin
+        <tr valign="top">
+            <th scope="row"><?php esc_html_e( 'Gift a Donation', 'plugin-donation-lib' ); ?></th>
+            <td>
+                <p>
+					<?php esc_html_e( 'Hi, I\'m Alan and I built this free plugin to solve problems I had, and I hope it solves your problem too.', 'plugin-donation-lib' ); ?>
+                </p>
+                <p>
+					<?php esc_html_e( 'It would really help me know that others find it useful and a great way of doing this is to gift me a small donation', 'plugin-donation-lib' ); ?>
+                </p>
+                <h3>
+					<?php esc_html_e( 'Gift a donation: select your desired option', 'plugin-donation-lib' ); ?>
                 </h3>
-                <div>
-					<?php esc_html_e( 'My Dogecoin address', 'plugin-donation-lib' ); ?><br><br><strong>D7nB2HsBxNPACis9fSgjqTShe4JfSztAjr</strong>
+                <!-- Tab links -->
+                <div class="tab">
+                    <button class="tablinks" onclick="openCrypto(event, 'BTC')"><img height="32"
+                                                                                     src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BTC.png' ?>">
+                    </button>
+                    <button class="tablinks" onclick="openCrypto(event, 'PP')"><img height="32"
+                                                                                    src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/PP.png' ?>">
+                    </button>
+                    <button class="tablinks" onclick="openCrypto(event, 'BCH')"><img height="32"
+                                                                                     src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BCH.png' ?>"><br>Bitcoin
+                        Cash
+                    </button>
+                    <button class="tablinks" onclick="openCrypto(event, 'ETH')"><img height="32"
+                                                                                     src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/ETH.png' ?>"><br>Ethereum
+                    </button>
+                    <button class="tablinks" onclick="openCrypto(event, 'DOGE')"><img height="32"
+                                                                                      src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/DOGE.png' ?>"><br>Dogecoin
+                    </button>
+
                 </div>
-                <div>
-                    <img height="140"
-                         src="<?php echo plugin_dir_url( __FILE__ ) . 'images/QRcodes/DOGE.png' ?>">
+
+                <!-- Tab content -->
+                <div class="tabcontentwrap">
+                    <div id="BTC" class="tabcontent">
+                        <div>
+                            <img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BTC.png' ?>">
+                        </div>
+                        <div>
+							<?php esc_html_e( 'My Bitcoin donation wallet', 'plugin-donation-lib' ); ?><br><br> <strong><a
+                                        href="https://www.blockchain.com/btc/address/bc1q04zt3yxxu282ayg3aev633twpqtw0dzzetp78x">bc1q04zt3yxxu282ayg3aev633twpqtw0dzzetp78x</a></strong>
+                        </div>
+                        <div>
+                            <img height="140"
+                                 src="<?php echo plugin_dir_url( __FILE__ ) . 'images/QRcodes/BTC.png' ?>">
+                        </div>
+                    </div>
+                    <div id="PP" class="tabcontent">
+                        <div><a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q"
+                                target="_blank"><img height="48"
+                                                     src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/PP.png' ?>">
+                            </a></div>
+                        <div><a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q"
+                                target="_blank"><?php esc_html_e( 'Gift a donation via PayPal', 'plugin-donation-lib' ); ?>
+                            </a></div>
+                        <div><a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q"
+                                target="_blank"><img height="48"
+                                                     src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/PPcards.png' ?>">
+                            </a></div>
+                    </div>
+                    <div id="BCH" class="tabcontent">
+                        <div><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BCH.png' ?>">
+                        </div>
+                        <div>
+							<?php esc_html_e( 'My Bitcoin Cash address', 'plugin-donation-lib' ); ?><br><br><strong>bitcoincash:qpmn76wad2mwfhk3c9vhx77ex5nqhq2r0ursp8z6mp</strong>
+                        </div>
+                        <div>
+                            <img height="140"
+                                 src="<?php echo plugin_dir_url( __FILE__ ) . 'images/QRcodes/BCH.png' ?>">
+                        </div>
+                    </div>
+
+                    <div id="ETH" class="tabcontent">
+                        <div><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/ETH.png' ?>">
+                        </div>
+                        <div>
+							<?php esc_html_e( 'My Ethereum address', 'plugin-donation-lib' ); ?><br><br><strong>0x492Bdf65bcB65bC067Ab3886e9B79a7CDe9021BB</strong>
+                        </div>
+                        <div>
+                            <img height="140"
+                                 src="<?php echo plugin_dir_url( __FILE__ ) . 'images/QRcodes/ETH.png' ?>">
+                        </div>
+                    </div>
+                    <div id="DOGE" class="tabcontent">
+                        <h3><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/DOGE.png' ?>">Dogecoin
+                        </h3>
+                        <div>
+							<?php esc_html_e( 'My Dogecoin address', 'plugin-donation-lib' ); ?><br><br><strong>D7nB2HsBxNPACis9fSgjqTShe4JfSztAjr</strong>
+                        </div>
+                        <div>
+                            <img height="140"
+                                 src="<?php echo plugin_dir_url( __FILE__ ) . 'images/QRcodes/DOGE.png' ?>">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <h3><?php esc_html_e( 'Contribute to the project in other ways', 'plugin-donation-lib' ); ?></h3>
-        <p>
-			<?php esc_html_e( 'If it worked well for you, why not share that with the community through a review?', 'plugin-donation-lib' ); ?>
-        </p>
-        <p>
-            <a class="button-secondary"
-               href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/reviews/?view=all#new-post"
-               target="_blank"><?php esc_html_e( 'SUBMIT A REVIEW', 'plugin-donation-lib' ); ?></a>
-        </p>
-        <p>
-			<?php esc_html_e( 'Or support the community in another way, if you have language skills, why not translate the plugin, it is easy to do', 'plugin-donation-lib' ); ?>
-        </p>
-        <p>
-            <a class="button-secondary"
-               href="https://translate.wordpress.org/projects/wp-plugins/<?php echo esc_attr( $this->plugin_slug ); ?>/"
-               target="_blank"><?php esc_html_e( 'TRANSLATE INTO YOUR LANGUAGE', 'plugin-donation-lib' ); ?></a>
-        </p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <th scope="row"><?php esc_html_e( 'Contribute', 'plugin-donation-lib' ); ?></th>
+            <td>
+                <!-- Tab links -->
+                <div class="tab">
+                    <button class="tablinks" onclick="openCrypto(event, 'review-tab')"><img height="32"
+                                                                                            src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/reviews.png' ?>"><br><?php esc_html_e( 'Submit a review', 'plugin-donation-lib' ); ?>
+                    </button>
+                    <button class="tablinks" onclick="openCrypto(event, 'translate-tab')"><img height="32"
+                                                                                               src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/translate.png' ?>"><br><?php esc_html_e( 'Translate to your language', 'plugin-donation-lib' ); ?>
+                    </button>
+                    <button class="tablinks" onclick="openCrypto(event, 'github-tab')"><img height="32"
+                                                                                            src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/github.png' ?>"><br>Help
+                        Develop
+                    </button>
+                </div>
+                <!-- Tab content -->
+                <div class="tabcontentwrap">
+                    <div id="review-tab" class="tabcontent">
+                        <div>
+                            <a class="button-secondary"
+                               href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/reviews/?view=all#new-post"
+                               target="_blank"><?php esc_html_e( 'SUBMIT A REVIEW', 'plugin-donation-lib' ); ?></a>
+                        </div>
+                        <div>
+                            <p><?php esc_html_e( 'If you are happy with the plugin the we would love a review. Even if you are not so happy feedback is always useful, but if you have issues we would love you to make a support request first so we can try and help.', 'plugin-donation-lib' ); ?></p>
+                        </div>
+                        <div>
+                            <a class="button-secondary"
+                               href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/"
+                               target="_blank"><?php esc_html_e( 'SUPPORT FORUM', 'plugin-donation-lib' ); ?></a>
+                        </div>
+                    </div>
+                    <div id="translate-tab" class="tabcontent">
+                        <div>
+                            <a href="https://translate.wordpress.org/projects/wp-plugins/<?php echo esc_attr( $this->plugin_slug ); ?>/"
+                               target="_blank"><img height="48"
+                                                    src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/translate.png' ?>">
+                            </a></div>
+                        <div>
+                            <p><?php esc_html_e( 'Providing some translations for a plugin is very easy and can be done via the WordPress system. You can easily contribute to the community and you don\'t need to translate it all.', 'plugin-donation-lib' ); ?> </p>
+                        </div>
+                        <div><a class="button-secondary"
+                                href="https://translate.wordpress.org/projects/wp-plugins/<?php echo esc_attr( $this->plugin_slug ); ?>/"
+                                target="_blank"><?php esc_html_e( 'TRANSLATE INTO YOUR LANGUAGE', 'plugin-donation-lib' ); ?></a>
+                        </div>
+                    </div>
+                    <div id="github-tab" class="tabcontent">
+                        <div><a href="https://github.com/alanef/<?php echo esc_attr( $this->plugin_slug ); ?>/"
+                                target="_blank"><img height="48"
+                                                     src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/github.png' ?>"></a>
+                        </div>
+                        <div>
+                            <p><?php esc_html_e( 'As an open source project you are welcome to contribute to the development of the software if you can. The development plugin is hosted on GitHub.', 'plugin-donation-lib' ); ?></p>
+                        </div>
+                        <div>
+                            <a class="button-secondary"
+                               href="https://github.com/alanef/<?php echo esc_attr( $this->plugin_slug ); ?>/"
+                               target="_blank"><?php esc_html_e( 'CONTRIBUTE ON GITHUB', 'plugin-donation-lib' ); ?></a>
+                        </div>
+                    </div>
+
+                </div>
+            </td>
+        </tr>
+        <tr valign="top">
+            <th scope="row"><?php esc_html_e( 'Get Support', 'plugin-donation-lib' ); ?></th>
+            <td>
+                <a class="button-secondary"
+                   href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/"
+                   target="_blank"><?php esc_html_e( 'WORDPRESS SUPPORT FORUM', 'plugin-donation-lib' ); ?></a>
+            </td>
+        </tr>
 		<?php
 	}
 }
