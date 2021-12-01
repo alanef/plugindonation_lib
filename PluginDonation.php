@@ -7,10 +7,12 @@ class PluginDonation {
 	protected $settings_hook;
 	protected $plugin_file;
 
-	public function __construct( $plugin_slug, $settings_hook, $plugin_file ) {
+	public function __construct( $plugin_slug, $settings_hook, $plugin_file, $donate_page, $title ) {
 		$this->plugin_slug   = $plugin_slug;
 		$this->settings_hook = $settings_hook;
 		$this->plugin_file   = $plugin_file;
+		$this->donate_page   = $donate_page;
+		$this->title         = $title;
 		$this->hooks();
 	}
 
@@ -18,6 +20,9 @@ class PluginDonation {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'plugins_loaded', array( $this, 'languages' ) );
+		add_action( 'admin_notices', array( $this, 'display_admin_notice' ) );
+		add_action( 'wp_ajax_pdl_dismiss_notice', array( $this, 'pdl_dismiss_notice' ) );
+		add_action( 'wp_ajax_pdl_later_notice', array( $this, 'pdl_later_notice' ) );
 		register_activation_hook( $this->plugin_file, array( $this, 'plugin_activate' ) );
 		register_uninstall_hook(
 			$this->plugin_file,
@@ -110,6 +115,7 @@ class PluginDonation {
 .tabcontent div {
   flex-grow: 1;
 }
+
 .tabcontent div:nth-of-type(2) {
   flex-basis: 250px;
 }
@@ -123,38 +129,28 @@ EOT;
 
 
 	public function enqueue_scripts( $hook ) {
-		if ( $hook === $this->settings_hook ) {
-			$this->add_inline_admin_script();
-
+        // only on pages we touch
+		$page             = get_current_screen()->base;
+		$display_on_pages = array(
+			'dashboard',
+			'plugins',
+			'tools',
+			'options-general',
+			$this->settings_hook,
+		);
+		if ( ! in_array( $page, $display_on_pages ) ) {
 			return;
 		}
+		wp_enqueue_script( 'plugindonation_lib', plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'jquery' ), '1.0', false );
+		$this->add_inline_admin_script();
+
 	}
 
 	private function add_inline_admin_script() {
 		$script = <<<EOT
-function openCrypto(evt, cryptName) {
-    evt.preventDefault();
-    // Declare all variables
-    var i, tabcontent, tablinks;
 
-    // Get all elements with class="tabcontent" and hide them
-     tabcontent = document.getElementsByClassName("tabcontent");
-     for (i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.display = "none";
-     }
-
-     // Get all elements with class="tablinks" and remove the class "active"
-     tablinks = document.getElementsByClassName("tablinks");
-     for (i = 0; i < tablinks.length; i++) {
-          tablinks[i].className = tablinks[i].className.replace(" active", "");
-     }
-
-     // Show the current tab, and add an "active" class to the button that opened the tab
-     document.getElementById(cryptName).style.display = "flex";
-     evt.currentTarget.className += " active";
-}
 EOT;
-		wp_add_inline_script( 'admin-bar', $script );
+		wp_add_inline_script( 'plugindonation_lib', $script, 'before' );
 	}
 
 	public function display() {
@@ -173,20 +169,20 @@ EOT;
                 </h3>
                 <!-- Tab links -->
                 <div class="tab">
-                    <button class="tablinks" onclick="openCrypto(event, 'BTC')"><img height="32"
+                    <button class="tablinks" onclick="openPDLTab(event, 'BTC')"><img height="32"
                                                                                      src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BTC.png' ?>">
                     </button>
-                    <button class="tablinks" onclick="openCrypto(event, 'PP')"><img height="32"
+                    <button class="tablinks" onclick="openPDLTab(event, 'PP')"><img height="32"
                                                                                     src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/PP.png' ?>">
                     </button>
-                    <button class="tablinks" onclick="openCrypto(event, 'BCH')"><img height="32"
+                    <button class="tablinks" onclick="openPDLTab(event, 'BCH')"><img height="32"
                                                                                      src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BCH.png' ?>"><br>Bitcoin
                         Cash
                     </button>
-                    <button class="tablinks" onclick="openCrypto(event, 'ETH')"><img height="32"
+                    <button class="tablinks" onclick="openPDLTab(event, 'ETH')"><img height="32"
                                                                                      src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/ETH.png' ?>"><br>Ethereum
                     </button>
-                    <button class="tablinks" onclick="openCrypto(event, 'DOGE')"><img height="32"
+                    <button class="tablinks" onclick="openPDLTab(event, 'DOGE')"><img height="32"
                                                                                       src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/DOGE.png' ?>"><br>Dogecoin
                     </button>
 
@@ -262,13 +258,13 @@ EOT;
             <td>
                 <!-- Tab links -->
                 <div class="tab">
-                    <button class="tablinks" onclick="openCrypto(event, 'review-tab')"><img height="32"
+                    <button class="tablinks" onclick="openPDLTab(event, 'review-tab')"><img height="32"
                                                                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/reviews.png' ?>"><br><?php esc_html_e( 'Submit a review', 'plugin-donation-lib' ); ?>
                     </button>
-                    <button class="tablinks" onclick="openCrypto(event, 'translate-tab')"><img height="32"
+                    <button class="tablinks" onclick="openPDLTab(event, 'translate-tab')"><img height="32"
                                                                                                src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/translate.png' ?>"><br><?php esc_html_e( 'Translate to your language', 'plugin-donation-lib' ); ?>
                     </button>
-                    <button class="tablinks" onclick="openCrypto(event, 'github-tab')"><img height="32"
+                    <button class="tablinks" onclick="openPDLTab(event, 'github-tab')"><img height="32"
                                                                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/github.png' ?>"><br>Help
                         Develop
                     </button>
@@ -331,5 +327,118 @@ EOT;
             </td>
         </tr>
 		<?php
+	}
+
+	public function display_admin_notice() {
+
+
+		// Don't display notices to users that can't do anything about it.
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			return;
+		}
+		// Notices are only displayed on the dashboard, plugins, tools, and settings admin pages.
+		$page             = get_current_screen()->base;
+		$display_on_pages = array(
+			'dashboard',
+			'plugins',
+			'tools',
+			'options-general',
+			$this->settings_hook,
+		);
+		if ( ! in_array( $page, $display_on_pages ) ) {
+			return;
+		}
+		$notice        = '';
+		$user_id       = get_current_user_id();
+		$um            = get_user_meta( $user_id, $this->plugin_slug . '_pdlib_dismissed_notices', true );
+		$notice_donate = $this->plugin_slug . '_pdlib_notice_donate';
+		if ( ! isset( $um[ $notice_donate ] ) || true !== $um[ $notice_donate ] ) {
+			$donate = get_option( $this->plugin_slug . '_donate' );
+			if ( false !== $donate && time() > (int) $donate + ( 6 * WEEK_IN_SECONDS ) ) {
+				?>
+                <div id="<?php echo esc_attr( $notice_donate ); ?>"
+                     class="pdl_notice notice is-dismissible notice-warning">
+                    <p><?php echo esc_html__( 'Hi I\'m Alan and I support the free plugin', 'plugin-dontaion-lib' ) .
+					              ' <strong>' . esc_html( $this->title ) .
+					              '</strong> ' . esc_html__( 'for you.  You have been using the plugin for a while now and WordPress has probably been through several updates by now. So I\'m asking if you can help keep this plugin free, by donating a very small amount of cash. If you can that would be a fantastic help to keeping this plugin updated.', 'plugin-donate-lib' ); ?></p>
+                    <p>
+                        <a href="<?php echo esc_attr( $this->donate_page ); ?>"><?php esc_html_e( 'Donate via this page', 'plugin-donate-lib' ); ?></a>
+                    </p>
+                    <p><a class="remind" href=""><?php esc_html_e( 'Remind me later', 'plugin-donate-lib' ); ?></a></p>
+                    <p><a class="dismiss"
+                          href=""><?php esc_html_e( 'I have already donated', 'plugin-donate-lib' ); ?></a></p>
+                    <p><a class="dismiss"
+                          href=""><?php esc_html_e( 'I don\'t want to donate, dismiss this notice permanently', 'plugin-donate-lib' ); ?></a>
+                    </p>
+                </div>
+				<?php
+			}
+		}
+		$notice_review = $this->plugin_slug . '_pdlib_notice_review';
+		if ( ! isset( $um[ $notice_review ] ) || true !== $um[ $notice_review ] ) {
+			$review = get_option( $this->plugin_slug . '_review' );
+			if ( false !== $review && time() > (int) $review + ( 4 * WEEK_IN_SECONDS ) ) {
+				?>
+                <div id="<?php echo esc_attr( $notice_review ); ?>"
+                     class="pdl_notice notice is-dismissible notice-sucess">
+                    <p><?php echo esc_html__( 'Hi I\'m Alan and you have been using this plugin', 'plugin-dontaion-lib' ) .
+					              ' <strong>' . esc_html( $this->title ) .
+					              '</strong> ' . esc_html__( 'for a while - that is awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help spread the word and boost my motivation..', 'plugin-donate-lib' ); ?></p>
+                    <p>
+                        <a target="_blank"
+                           href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/reviews/?view=all#new-post"><?php esc_html_e( 'OK, you deserve it', 'plugin-donate-lib' ); ?></a>
+                    </p>
+                    <p><a class="remind" href=""><?php esc_html_e( 'Maybe later', 'plugin-donate-lib' ); ?></a></p>
+                    <p><a class="dismiss"
+                          href=""><?php esc_html_e( 'Already done', 'plugin-donate-lib' ); ?></a></p>
+                    <p><a class="dismiss"
+                          href=""><?php esc_html_e( 'No thanks, dismiss this request', 'plugin-donate-lib' ); ?></a>
+                    </p>
+                </div>
+				<?php
+			}
+		}
+	}
+
+	public function pdl_dismiss_notice() {
+		$user_id = get_current_user_id();
+		if ( ! wp_doing_ajax() ) {
+			return;
+		}
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			return;
+		}
+		$um = get_user_meta( $user_id, $this->plugin_slug . '_pdlib_dismissed_notices', true );
+		if ( ! is_array( $um ) ) {
+			$um = [];
+		}
+		$um[ sanitize_text_field( $_POST['id'] ) ] = true;
+		update_user_meta( $user_id, $this->plugin_slug . '_pdlib_dismissed_notices', $um );
+		wp_die();
+	}
+
+	public function pdl_later_notice() {
+
+		if ( ! wp_doing_ajax() ) {
+			return;
+		}
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			return;
+		}
+		if ( sanitize_text_field( $_POST['id'] ) === $this->plugin_slug . '_pdlib_notice_donate' ) {
+			// donate later
+			$donate = get_option( $this->plugin_slug . '_donate' );
+			if ( false !== $donate ) {
+				update_option( $this->plugin_slug . '_donate', (int) $donate + ( 6 * WEEK_IN_SECONDS ) );
+			}
+		}
+		if ( sanitize_text_field( $_POST['id'] ) === $this->plugin_slug . '_pdlib_notice_review' ) {
+			// review later
+			$review = get_option( $this->plugin_slug . '_review' );
+			if ( false !== $review ) {
+				update_option( $this->plugin_slug . '_review', (int) $review + ( 4 * WEEK_IN_SECONDS ) );
+			}
+		}
+		wp_die();
 	}
 }
