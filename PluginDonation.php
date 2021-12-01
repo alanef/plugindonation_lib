@@ -256,6 +256,9 @@ EOT;
         <tr valign="top">
             <th scope="row"><?php esc_html_e( 'Contribute', 'plugin-donation-lib' ); ?></th>
             <td>
+                <h3>
+		            <?php esc_html_e( 'Contribute to the Open Source Project in other ways', 'plugin-donation-lib' ); ?>
+                </h3>
                 <!-- Tab links -->
                 <div class="tab">
                     <button class="tablinks" onclick="openPDLTab(event, 'review-tab')"><img height="32"
