@@ -250,7 +250,7 @@ EOT;
                 </div>
             </div>
         </div>
-        <h3><?php esc_html_e( 'Contribute top the project in other ways', 'plugin-donation-lib' ); ?></h3>
+        <h3><?php esc_html_e( 'Contribute to the project in other ways', 'plugin-donation-lib' ); ?></h3>
         <p>
 			<?php esc_html_e( 'If it worked well for you, why not share that with the community through a review?', 'plugin-donation-lib' ); ?>
         </p>
