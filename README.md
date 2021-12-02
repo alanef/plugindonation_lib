@@ -3,7 +3,7 @@
 
 ## Purpose
 
-This is intented to be incorporated into free WordPress plugins to standardize donation / contribution and support info
+This is intended to be incorporated into free WordPress plugins to standardize donation / contribution and support info
 
 ## Features
 
