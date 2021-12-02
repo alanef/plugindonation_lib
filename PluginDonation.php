@@ -60,7 +60,9 @@ class PluginDonation {
 		add_action( 'admin_notices', array( $this, 'display_admin_notice' ) );
 		add_action( 'wp_ajax_pdl_dismiss_notice', array( $this, 'pdl_dismiss_notice' ) );
 		add_action( 'wp_ajax_pdl_later_notice', array( $this, 'pdl_later_notice' ) );
-		add_action( 'init', array( $plugin_admin, 'redirect_to_settings' ) );
+		add_action( 'init', array( $this, 'redirect_to_settings' ) );
+		add_filter( 'plugin_action_links_' . $this->plugin_file, array( $this, 'settings_link' ) );
+		add_filter( 'plugin_row_meta', array( $this, 'plugin_meta' ), 10, 2 );
 		register_activation_hook( $this->plugin_file, array( $this, 'plugin_activate' ) );
 		register_uninstall_hook(
 			$this->plugin_file,
@@ -98,6 +100,36 @@ class PluginDonation {
 				exit;
 			}
 		}
+	}
+
+	/**
+	 * @param $links
+	 *
+	 * @return array
+	 * @since 1.1
+	 *
+	 */
+	public function settings_link( $links ) {
+		$settings_link = '<a href="' . esc_url( $this->settings_url ) . '">' . esc_html__( 'Settings', 'stop-wp-emails-going-to-spam' ) . '</a>';
+		array_push(
+			$links,
+			$settings_link
+		);
+
+		return $links;
+	}
+
+	function plugin_meta( $links, $file ) {
+
+		if ( $this->plugin_file === $file ) {
+			$new_links = array(
+				'<a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q" target="_blank">' . esc_html__( 'Donate to Support', 'stop-wp-emails-going-to-spam' ) . '</a>'
+			);
+
+			$links = array_merge( $links, $new_links );
+		}
+
+		return $links;
 	}
 
 	/**
