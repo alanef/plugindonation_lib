@@ -8,7 +8,7 @@ This is intended to be incorporated into free WordPress plugins to standardize d
 ## Features
 
 * adds a section for use in settings with donation and contribution tabber
-* adds a seetings link on plugin list
+* adds a settings link on plugin list
 * adds a donation link on plugin list
 * automatically redirects to settings page on activation
 
