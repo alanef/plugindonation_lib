@@ -271,22 +271,51 @@ EOT;
 		return in_array( $page, $display_on_pages );
 	}
 
+	private function get_string($id) {
+        if ( isset($this->strings[$id]) ){
+            return $this->strings[$id];
+        }
+        return '??';
+	}
+    
+
+    private function set_strings(){
+        $this->strings = array(
+	        esc_html__( 'Gift a Donation', 'plugin-donation-lib' ), // 0
+	        esc_html__( 'Hi, I\'m Alan and I built this free plugin to solve problems I had, and I hope it solves your problem too.', 'plugin-donation-lib' ), // 1
+	        esc_html__( 'It would really help me know that others find it useful and a great way of doing this is to gift me a small donation', 'plugin-donation-lib'), // 2
+	        esc_html__( 'Gift a donation: select your desired option', 'plugin-donation-lib' ), // 3
+	        esc_html__( 'My Bitcoin donation wallet', 'plugin-donation-lib' ), // 4
+	        esc_html__( 'Gift a donation via PayPal', 'plugin-donation-lib' ), // 5
+	        esc_html__( 'My Bitcoin Cash address', 'plugin-donation-lib' ),  // 6
+	        esc_html__( 'My Ethereum address', 'plugin-donation-lib' ), // 7
+	        esc_html__( 'My Dogecoin address', 'plugin-donation-lib' ), // 8
+	        esc_html__( 'Contribute', 'plugin-donation-lib' ), // 9
+	        esc_html__( 'Contribute to the Open Source Project in other ways', 'plugin-donation-lib' ), // 10
+	        esc_html__( 'Submit a review', 'plugin-donation-lib' ), // 11
+// @TODO  finish add strings and then 'export' to free plugins so they get incorporated in translation files
+        );
+
+        $this->strings = apply_filters('plugindonation_lib_strings', $this->strings);
+
+    }
+
 	/**
 	 * @since 1.0
 	 */
 	public function display() {
 		?>
         <tr valign="top">
-            <th scope="row"><?php esc_html_e( 'Gift a Donation', 'plugin-donation-lib' ); ?></th>
+            <th scope="row"><?php  echo esc_html($this->get_string( 0 )); ?></th>
             <td>
                 <p>
-					<?php esc_html_e( 'Hi, I\'m Alan and I built this free plugin to solve problems I had, and I hope it solves your problem too.', 'plugin-donation-lib' ); ?>
+					<?php echo esc_html($this->get_string( 1 )); ?>
                 </p>
                 <p>
-					<?php esc_html_e( 'It would really help me know that others find it useful and a great way of doing this is to gift me a small donation', 'plugin-donation-lib' ); ?>
+					<?php echo esc_html($this->get_string( 2 )); ?>
                 </p>
                 <h3>
-					<?php esc_html_e( 'Gift a donation: select your desired option', 'plugin-donation-lib' ); ?>
+					<?php echo esc_html($this->get_string( 3 )); ?>
                 </h3>
                 <!-- Tab links -->
                 <div class="tab">
@@ -316,7 +345,7 @@ EOT;
                             <img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BTC.png'; ?>">
                         </div>
                         <div>
-							<?php esc_html_e( 'My Bitcoin donation wallet', 'plugin-donation-lib' ); ?><br><br> <strong><a
+							<?php echo esc_html($this->get_string( 4 )); ?><br><br> <strong><a
                                         href="https://www.blockchain.com/btc/address/bc1q04zt3yxxu282ayg3aev633twpqtw0dzzetp78x">bc1q04zt3yxxu282ayg3aev633twpqtw0dzzetp78x</a></strong>
                         </div>
                         <div>
@@ -330,7 +359,7 @@ EOT;
                                                      src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/PP.png'; ?>">
                             </a></div>
                         <div><a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q"
-                                target="_blank"><?php esc_html_e( 'Gift a donation via PayPal', 'plugin-donation-lib' ); ?>
+                                target="_blank"><?php echo esc_html($this->get_string( 5 )); ?>
                             </a></div>
                         <div><a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q"
                                 target="_blank"><img height="48"
@@ -341,7 +370,7 @@ EOT;
                         <div><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BCH.png'; ?>">
                         </div>
                         <div>
-							<?php esc_html_e( 'My Bitcoin Cash address', 'plugin-donation-lib' ); ?><br><br><strong>bitcoincash:qpmn76wad2mwfhk3c9vhx77ex5nqhq2r0ursp8z6mp</strong>
+							<?php echo esc_html($this->get_string( 6 )); ?><br><br><strong>bitcoincash:qpmn76wad2mwfhk3c9vhx77ex5nqhq2r0ursp8z6mp</strong>
                         </div>
                         <div>
                             <img height="140"
@@ -353,7 +382,7 @@ EOT;
                         <div><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/ETH.png'; ?>">
                         </div>
                         <div>
-							<?php esc_html_e( 'My Ethereum address', 'plugin-donation-lib' ); ?><br><br><strong>0x492Bdf65bcB65bC067Ab3886e9B79a7CDe9021BB</strong>
+							<?php echo esc_html($this->get_string( 7 )); ?><br><br><strong>0x492Bdf65bcB65bC067Ab3886e9B79a7CDe9021BB</strong>
                         </div>
                         <div>
                             <img height="140"
@@ -364,7 +393,7 @@ EOT;
                         <h3><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/DOGE.png'; ?>">Dogecoin
                         </h3>
                         <div>
-							<?php esc_html_e( 'My Dogecoin address', 'plugin-donation-lib' ); ?><br><br><strong>D7nB2HsBxNPACis9fSgjqTShe4JfSztAjr</strong>
+							<?php echo esc_html($this->get_string( 8 )); ?><br><br><strong>D7nB2HsBxNPACis9fSgjqTShe4JfSztAjr</strong>
                         </div>
                         <div>
                             <img height="140"
@@ -375,15 +404,15 @@ EOT;
             </td>
         </tr>
         <tr valign="top">
-            <th scope="row"><?php esc_html_e( 'Contribute', 'plugin-donation-lib' ); ?></th>
+            <th scope="row"><?php echo esc_html($this->get_string( 9 )); ?></th>
             <td>
                 <h3>
-					<?php esc_html_e( 'Contribute to the Open Source Project in other ways', 'plugin-donation-lib' ); ?>
+					<?php echo esc_html($this->get_string( 10 )); ?>
                 </h3>
                 <!-- Tab links -->
                 <div class="tab">
                     <button class="tablinks" onclick="openPDLTab(event, 'review-tab')"><img height="32"
-                                                                                            src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/reviews.png'; ?>"><br><?php esc_html_e( 'Submit a review', 'plugin-donation-lib' ); ?>
+                                                                                            src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/reviews.png'; ?>"><br><?php echo esc_html($this->get_string( 11 )); ?>
                     </button>
                     <button class="tablinks" onclick="openPDLTab(event, 'translate-tab')"><img height="32"
                                                                                                src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/translate.png'; ?>"><br><?php esc_html_e( 'Translate to your language', 'plugin-donation-lib' ); ?>
