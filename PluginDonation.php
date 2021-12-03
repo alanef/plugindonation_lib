@@ -111,7 +111,7 @@ class PluginDonation {
 	 */
 	public function settings_link( $links ) {
 		$settings_link = '<a href="' . esc_url( $this->settings_url ) . '">' . esc_html__( 'Settings', 'stop-wp-emails-going-to-spam' ) . '</a>';
-		array_push(
+		array_unshift(
 			$links,
 			$settings_link
 		);
