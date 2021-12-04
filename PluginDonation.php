@@ -431,7 +431,7 @@ EOT;
                                target="_blank"><?php esc_html_e( 'SUBMIT A REVIEW', 'plugin-donation-lib' ); ?></a>
                         </div>
                         <div>
-                            <p><?php esc_html_e( 'If you are happy with the plugin the we would love a review. Even if you are not so happy feedback is always useful, but if you have issues we would love you to make a support request first so we can try and help.', 'plugin-donation-lib' ); ?></p>
+                            <p><?php esc_html_e( 'If you are happy with the plugin then we would love a review. Even if you are not so happy feedback is always useful, but if you have issues we would love you to make a support request first so we can try and help.', 'plugin-donation-lib' ); ?></p>
                         </div>
                         <div>
                             <a class="button-secondary"

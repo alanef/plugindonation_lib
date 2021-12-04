@@ -87,7 +87,7 @@ msgstr "Goruslerini gonder"
 
 #: PluginDonation.php:405
 msgid ""
-"If you are happy with the plugin the we would love a review. Even if you are "
+"If you are happy with the plugin then we would love a review. Even if you are "
 "not so happy feedback is always useful, but if you have issues we would love "
 "you to make a support request first so we can try and help."
 msgstr ""
