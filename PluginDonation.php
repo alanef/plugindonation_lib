@@ -124,7 +124,7 @@ class PluginDonation {
 
 		if ( $this->plugin_file === $file ) {
 			$new_links = array(
-				'<a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q" target="_blank">' . esc_html($this->get_string( 32 )) . '</a>'
+				'<a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q" target="_blank">' . esc_html($this->get_string( 34 )) . '</a>'
 			);
 
 			$links = array_merge( $links, $new_links );
