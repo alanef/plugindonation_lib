@@ -280,7 +280,7 @@ EOT;
 	}
     
 
-    private function set_strings(){
+    public function set_strings(){
         $this->strings = array(
 	        esc_html__( 'Gift a Donation', 'plugin-donation-lib' ), // 0
 	        esc_html__( 'Hi, I\'m Alan and I built this free plugin to solve problems I had, and I hope it solves your problem too.', 'plugin-donation-lib' ), // 1
