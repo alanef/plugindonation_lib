@@ -110,7 +110,7 @@ class PluginDonation {
 	 *
 	 */
 	public function settings_link( $links ) {
-		$settings_link = '<a href="' . esc_url( $this->settings_url ) . '">' . esc_html__( 'Settings', 'stop-wp-emails-going-to-spam' ) . '</a>';
+		$settings_link = '<a href="' . esc_url( $this->settings_url ) . '">' . esc_html($this->get_string( 35 )) . '</a>';
 		array_unshift(
 			$links,
 			$settings_link
@@ -123,7 +123,7 @@ class PluginDonation {
 
 		if ( $this->plugin_file === $file ) {
 			$new_links = array(
-				'<a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q" target="_blank">' . esc_html__( 'Donate to Support', 'stop-wp-emails-going-to-spam' ) . '</a>'
+				'<a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q" target="_blank">' . esc_html($this->get_string( 32 )) . '</a>'
 			);
 
 			$links = array_merge( $links, $new_links );
@@ -296,7 +296,27 @@ EOT;
 	        esc_html__( 'Translate to your language', 'plugin-donation-lib' ), // 12
 	        esc_html__( 'SUBMIT A REVIEW', 'plugin-donation-lib' ), // 13
 	        esc_html__( 'If you are happy with the plugin then we would love a review. Even if you are not so happy feedback is always useful, but if you have issues we would love you to make a support request first so we can try and help.', 'plugin-donation-lib' ), // 14
-// @TODO  finish add strings and then 'export' to free plugins so they get incorporated in translation files
+	        esc_html__( 'SUPPORT FORUM', 'plugin-donation-lib' ), // 15
+	        esc_html__( 'Providing some translations for a plugin is very easy and can be done via the WordPress system. You can easily contribute to the community and you don\'t need to translate it all.', 'plugin-donation-lib' ), // 16
+	        esc_html__( 'TRANSLATE INTO YOUR LANGUAGE', 'plugin-donation-lib' ), // 17
+	        esc_html__( 'As an open source project you are welcome to contribute to the development of the software if you can. The development plugin is hosted on GitHub.', 'plugin-donation-lib' ), // 18
+	        esc_html__( 'CONTRIBUTE ON GITHUB', 'plugin-donation-lib' ), // 19
+	        esc_html__( 'Get Support', 'plugin-donation-lib' ), // 20
+	        esc_html__( 'WordPress SUPPORT FORUM', 'plugin-donation-lib' ), // 21
+	        esc_html__( 'Hi I\'m Alan and I support the free plugin', 'plugin-dontaion-lib' ), // 22
+	        esc_html__( 'for you.  You have been using the plugin for a while now and WordPress has probably been through several updates by now. So I\'m asking if you can help keep this plugin free, by donating a very small amount of cash. If you can that would be a fantastic help to keeping this plugin updated.', 'plugin-donate-lib' ), // 23
+	        esc_html__( 'Donate via this page', 'plugin-donate-lib' ), // 24
+	        esc_html__( 'Remind me later', 'plugin-donate-lib' ), // 25
+	        esc_html__( 'I have already donated', 'plugin-donate-lib' ), // 26
+	        esc_html__( 'I don\'t want to donate, dismiss this notice permanently', 'plugin-donate-lib' ), // 27
+	        esc_html__( 'Hi I\'m Alan and you have been using this plugin', 'plugin-dontaion-lib' ), // 28
+	        esc_html__( 'for a while - that is awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help spread the word and boost my motivation..', 'plugin-donate-lib' ), // 29
+	        esc_html__( 'OK, you deserve it', 'plugin-donate-lib' ), // 30
+	        esc_html__( 'Maybe later', 'plugin-donate-lib' ), // 31
+	        esc_html__( 'Already done', 'plugin-donate-lib' ), // 32
+	        esc_html__( 'No thanks, dismiss this request', 'plugin-donate-lib' ), // 33
+	        esc_html__( 'Donate to Support', 'plugin-donate-lib' ), // 34
+	        esc_html__( 'Settings', 'plugin-donate-lib' ), // 35
         );
 
         $this->strings = apply_filters('plugindonation_lib_strings', $this->strings);
@@ -418,7 +438,7 @@ EOT;
                                                                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/reviews.png'; ?>"><br><?php echo esc_html($this->get_string( 11 )); ?>
                     </button>
                     <button class="tablinks" onclick="openPDLTab(event, 'translate-tab')"><img height="32"
-                                                                                               src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/translate.png'; ?>"><br><?php esc_html($this->get_string( 12 )); ?>
+                                                                                               src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/translate.png'; ?>"><br><?php echo esc_html($this->get_string( 12 )); ?>
                     </button>
                     <button class="tablinks" onclick="openPDLTab(event, 'github-tab')"><img height="32"
                                                                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/github.png'; ?>"><br>Help
@@ -431,15 +451,15 @@ EOT;
                         <div>
                             <a class="button-secondary"
                                href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/reviews/?view=all#new-post"
-                               target="_blank"><?php esc_html($this->get_string( 13 )); ?></a>
+                               target="_blank"><?php echo esc_html($this->get_string( 13 )); ?></a>
                         </div>
                         <div>
-                            <p><?php esc_html($this->get_string( 15 )); ?></p>
+                            <p><?php echo esc_html($this->get_string( 14 )); ?></p>
                         </div>
                         <div>
                             <a class="button-secondary"
                                href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/"
-                               target="_blank"><?php esc_html_e( 'SUPPORT FORUM', 'plugin-donation-lib' ); ?></a>
+                               target="_blank"><?php echo esc_html($this->get_string( 15 )); ?></a>
                         </div>
                     </div>
                     <div id="translate-tab" class="tabcontent">
@@ -449,11 +469,11 @@ EOT;
                                                     src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/translate.png'; ?>">
                             </a></div>
                         <div>
-                            <p><?php esc_html_e( 'Providing some translations for a plugin is very easy and can be done via the WordPress system. You can easily contribute to the community and you don\'t need to translate it all.', 'plugin-donation-lib' ); ?> </p>
+                            <p><?php echo esc_html($this->get_string( 16 ));?> </p>
                         </div>
                         <div><a class="button-secondary"
                                 href="https://translate.wordpress.org/projects/wp-plugins/<?php echo esc_attr( $this->plugin_slug ); ?>/"
-                                target="_blank"><?php esc_html_e( 'TRANSLATE INTO YOUR LANGUAGE', 'plugin-donation-lib' ); ?></a>
+                                target="_blank"><?php echo esc_html($this->get_string( 17 )); ?></a>
                         </div>
                     </div>
                     <div id="github-tab" class="tabcontent">
@@ -462,12 +482,12 @@ EOT;
                                                      src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/github.png'; ?>"></a>
                         </div>
                         <div>
-                            <p><?php esc_html_e( 'As an open source project you are welcome to contribute to the development of the software if you can. The development plugin is hosted on GitHub.', 'plugin-donation-lib' ); ?></p>
+                            <p><?php echo esc_html($this->get_string( 18 )); ?></p>
                         </div>
                         <div>
                             <a class="button-secondary"
                                href="https://github.com/alanef/<?php echo esc_attr( $this->plugin_slug ); ?>/"
-                               target="_blank"><?php esc_html_e( 'CONTRIBUTE ON GITHUB', 'plugin-donation-lib' ); ?></a>
+                               target="_blank"><?php echo esc_html($this->get_string( 19 )); ?></a>
                         </div>
                     </div>
 
@@ -475,11 +495,11 @@ EOT;
             </td>
         </tr>
         <tr valign="top">
-            <th scope="row"><?php esc_html_e( 'Get Support', 'plugin-donation-lib' ); ?></th>
+            <th scope="row"><?php echo esc_html($this->get_string( 20 )); ?></th>
             <td>
                 <a class="button-secondary"
                    href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/"
-                   target="_blank"><?php esc_html_e( 'WordPress SUPPORT FORUM', 'plugin-donation-lib' ); ?></a>
+                   target="_blank"><?php echo esc_html($this->get_string( 21 )); ?></a>
             </td>
         </tr>
 		<?php
@@ -509,19 +529,19 @@ EOT;
                      class="pdl_notice notice is-dismissible notice-warning">
                     <p>
 						<?php
-						echo esc_html__( 'Hi I\'m Alan and I support the free plugin', 'plugin-dontaion-lib' ) .
+						echo esc_html($this->get_string( 22 )) .
 						     ' <strong>' . esc_html( $this->title ) .
-						     '</strong> ' . esc_html__( 'for you.  You have been using the plugin for a while now and WordPress has probably been through several updates by now. So I\'m asking if you can help keep this plugin free, by donating a very small amount of cash. If you can that would be a fantastic help to keeping this plugin updated.', 'plugin-donate-lib' );
+						     '</strong> ' . esc_html($this->get_string( 23 ));
 						?>
                     </p>
                     <p>
-                        <a href="<?php echo esc_attr( $this->settings_url ); ?>"><?php esc_html_e( 'Donate via this page', 'plugin-donate-lib' ); ?></a>
+                        <a href="<?php echo esc_attr( $this->settings_url ); ?>"><?php echo esc_html($this->get_string( 24 )); ?></a>
                     </p>
-                    <p><a class="remind" href=""><?php esc_html_e( 'Remind me later', 'plugin-donate-lib' ); ?></a></p>
+                    <p><a class="remind" href=""><?php echo esc_html($this->get_string( 25 )); ?></a></p>
                     <p><a class="dismiss"
-                          href=""><?php esc_html_e( 'I have already donated', 'plugin-donate-lib' ); ?></a></p>
+                          href=""><?php echo esc_html($this->get_string( 26 )); ?></a></p>
                     <p><a class="dismiss"
-                          href=""><?php esc_html_e( 'I don\'t want to donate, dismiss this notice permanently', 'plugin-donate-lib' ); ?></a>
+                          href=""><?php echo esc_html($this->get_string( 27 )); ?></a>
                     </p>
                 </div>
 				<?php
@@ -536,20 +556,20 @@ EOT;
                      class="pdl_notice notice is-dismissible notice-sucess">
                     <p>
 						<?php
-						echo esc_html__( 'Hi I\'m Alan and you have been using this plugin', 'plugin-dontaion-lib' ) .
+						echo esc_html($this->get_string( 28 )) .
 						     ' <strong>' . esc_html( $this->title ) .
-						     '</strong> ' . esc_html__( 'for a while - that is awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help spread the word and boost my motivation..', 'plugin-donate-lib' );
+						     '</strong> ' . esc_html($this->get_string( 29 ));
 						?>
                     </p>
                     <p>
                         <a target="_blank"
-                           href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/reviews/?view=all#new-post"><?php esc_html_e( 'OK, you deserve it', 'plugin-donate-lib' ); ?></a>
+                           href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/reviews/?view=all#new-post"><?php echo esc_html($this->get_string( 30 )); ?></a>
                     </p>
-                    <p><a class="remind" href=""><?php esc_html_e( 'Maybe later', 'plugin-donate-lib' ); ?></a></p>
+                    <p><a class="remind" href=""><?php echo esc_html($this->get_string( 31 )); ?></a></p>
                     <p><a class="dismiss"
-                          href=""><?php esc_html_e( 'Already done', 'plugin-donate-lib' ); ?></a></p>
+                          href=""><?php echo esc_html($this->get_string( 32 )); ?></a></p>
                     <p><a class="dismiss"
-                          href=""><?php esc_html_e( 'No thanks, dismiss this request', 'plugin-donate-lib' ); ?></a>
+                          href=""><?php echo esc_html($this->get_string( 33 )); ?></a>
                     </p>
                 </div>
 				<?php
