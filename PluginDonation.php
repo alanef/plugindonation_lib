@@ -293,6 +293,9 @@ EOT;
 	        esc_html__( 'Contribute', 'plugin-donation-lib' ), // 9
 	        esc_html__( 'Contribute to the Open Source Project in other ways', 'plugin-donation-lib' ), // 10
 	        esc_html__( 'Submit a review', 'plugin-donation-lib' ), // 11
+	        esc_html__( 'Translate to your language', 'plugin-donation-lib' ), // 12
+	        esc_html__( 'SUBMIT A REVIEW', 'plugin-donation-lib' ), // 13
+	        esc_html__( 'If you are happy with the plugin then we would love a review. Even if you are not so happy feedback is always useful, but if you have issues we would love you to make a support request first so we can try and help.', 'plugin-donation-lib' ), // 14
 // @TODO  finish add strings and then 'export' to free plugins so they get incorporated in translation files
         );
 
@@ -415,7 +418,7 @@ EOT;
                                                                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/reviews.png'; ?>"><br><?php echo esc_html($this->get_string( 11 )); ?>
                     </button>
                     <button class="tablinks" onclick="openPDLTab(event, 'translate-tab')"><img height="32"
-                                                                                               src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/translate.png'; ?>"><br><?php esc_html_e( 'Translate to your language', 'plugin-donation-lib' ); ?>
+                                                                                               src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/translate.png'; ?>"><br><?php esc_html($this->get_string( 12 )); ?>
                     </button>
                     <button class="tablinks" onclick="openPDLTab(event, 'github-tab')"><img height="32"
                                                                                             src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/github.png'; ?>"><br>Help
@@ -428,10 +431,10 @@ EOT;
                         <div>
                             <a class="button-secondary"
                                href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/reviews/?view=all#new-post"
-                               target="_blank"><?php esc_html_e( 'SUBMIT A REVIEW', 'plugin-donation-lib' ); ?></a>
+                               target="_blank"><?php esc_html($this->get_string( 13 )); ?></a>
                         </div>
                         <div>
-                            <p><?php esc_html_e( 'If you are happy with the plugin then we would love a review. Even if you are not so happy feedback is always useful, but if you have issues we would love you to make a support request first so we can try and help.', 'plugin-donation-lib' ); ?></p>
+                            <p><?php esc_html($this->get_string( 15 )); ?></p>
                         </div>
                         <div>
                             <a class="button-secondary"
