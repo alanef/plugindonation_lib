@@ -304,21 +304,21 @@ EOT;
 	        esc_html__( 'CONTRIBUTE ON GITHUB', 'plugin-donation-lib' ), // 19
 	        esc_html__( 'Get Support', 'plugin-donation-lib' ), // 20
 	        esc_html__( 'WordPress SUPPORT FORUM', 'plugin-donation-lib' ), // 21
-	        esc_html__( 'Hi I\'m Alan and I support the free plugin', 'plugin-dontaion-lib' ), // 22
-	        esc_html__( 'for you.  You have been using the plugin for a while now and WordPress has probably been through several updates by now. So I\'m asking if you can help keep this plugin free, by donating a very small amount of cash. If you can that would be a fantastic help to keeping this plugin updated.', 'plugin-donate-lib' ), // 23
-	        esc_html__( 'Donate via this page', 'plugin-donate-lib' ), // 24
-	        esc_html__( 'Remind me later', 'plugin-donate-lib' ), // 25
-	        esc_html__( 'I have already donated', 'plugin-donate-lib' ), // 26
-	        esc_html__( 'I don\'t want to donate, dismiss this notice permanently', 'plugin-donate-lib' ), // 27
-	        esc_html__( 'Hi I\'m Alan and you have been using this plugin', 'plugin-dontaion-lib' ), // 28
-	        esc_html__( 'for a while - that is awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help spread the word and boost my motivation..', 'plugin-donate-lib' ), // 29
-	        esc_html__( 'OK, you deserve it', 'plugin-donate-lib' ), // 30
-	        esc_html__( 'Maybe later', 'plugin-donate-lib' ), // 31
-	        esc_html__( 'Already done', 'plugin-donate-lib' ), // 32
-	        esc_html__( 'No thanks, dismiss this request', 'plugin-donate-lib' ), // 33
-	        esc_html__( 'Donate to Support', 'plugin-donate-lib' ), // 34
-	        esc_html__( 'Settings', 'plugin-donate-lib' ), // 35
-	        esc_html__( 'Help Develop', 'plugin-donate-lib' ), // 36
+	        esc_html__( 'Hi I\'m Alan and I support the free plugin', 'plugin-donation-lib' ), // 22
+	        esc_html__( 'for you.  You have been using the plugin for a while now and WordPress has probably been through several updates by now. So I\'m asking if you can help keep this plugin free, by donating a very small amount of cash. If you can that would be a fantastic help to keeping this plugin updated.', 'plugin-donation-lib' ), // 23
+	        esc_html__( 'Donate via this page', 'plugin-donation-lib' ), // 24
+	        esc_html__( 'Remind me later', 'plugin-donation-lib' ), // 25
+	        esc_html__( 'I have already donated', 'plugin-donation-lib' ), // 26
+	        esc_html__( 'I don\'t want to donate, dismiss this notice permanently', 'plugin-donation-lib' ), // 27
+	        esc_html__( 'Hi I\'m Alan and you have been using this plugin', 'plugin-donation-lib' ), // 28
+	        esc_html__( 'for a while - that is awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help spread the word and boost my motivation..', 'plugin-donation-lib' ), // 29
+	        esc_html__( 'OK, you deserve it', 'plugin-donation-lib' ), // 30
+	        esc_html__( 'Maybe later', 'plugin-donation-lib' ), // 31
+	        esc_html__( 'Already done', 'plugin-donation-lib' ), // 32
+	        esc_html__( 'No thanks, dismiss this request', 'plugin-donation-lib' ), // 33
+	        esc_html__( 'Donate to Support', 'plugin-donation-lib' ), // 34
+	        esc_html__( 'Settings', 'plugin-donation-lib' ), // 35
+	        esc_html__( 'Help Develop', 'plugin-donation-lib' ), // 36
         );
 
         $this->strings = apply_filters('plugindonation_lib_strings', $this->strings);
