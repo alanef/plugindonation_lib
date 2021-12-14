@@ -318,6 +318,7 @@ EOT;
 	        esc_html__( 'No thanks, dismiss this request', 'plugin-donate-lib' ), // 33
 	        esc_html__( 'Donate to Support', 'plugin-donate-lib' ), // 34
 	        esc_html__( 'Settings', 'plugin-donate-lib' ), // 35
+	        esc_html__( 'Help Develop', 'plugin-donate-lib' ), // 36
         );
 
         $this->strings = apply_filters('plugindonation_lib_strings', $this->strings);
@@ -442,8 +443,7 @@ EOT;
                                                                                                src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/translate.png'; ?>"><br><?php echo esc_html($this->get_string( 12 )); ?>
                     </button>
                     <button class="tablinks" onclick="openPDLTab(event, 'github-tab')"><img height="32"
-                                                                                            src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/github.png'; ?>"><br>Help
-                        Develop
+                                                                                            src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/github.png'; ?>"><br><?php echo esc_html($this->get_string( 36 )); ?>
                     </button>
                 </div>
                 <!-- Tab content -->
