@@ -57,7 +57,7 @@ class PluginDonation {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'plugins_loaded', array( $this, 'languages' ) );
-		add_action( 'plugins_loaded', array( $this, 'set_strings' ) );
+		add_action( 'init', array( $this, 'set_strings' ) );
 		add_action( 'admin_notices', array( $this, 'display_admin_notice' ) );
 		add_action( 'wp_ajax_pdl_dismiss_notice', array( $this, 'pdl_dismiss_notice' ) );
 		add_action( 'wp_ajax_pdl_later_notice', array( $this, 'pdl_later_notice' ) );
