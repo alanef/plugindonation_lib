@@ -1,4 +1,4 @@
-# Copyright (C) 2021 plugin-donation-lib
+# Copyright (C) 2022 plugin-donation-lib
 # This file is distributed under the same license as the plugin-donation-lib package.
 msgid ""
 msgstr ""
@@ -99,4 +99,64 @@ msgstr ""
 
 #: PluginDonation.php:306
 msgid "WordPress SUPPORT FORUM"
+msgstr ""
+
+#: PluginDonation.php:307
+msgid "Hi I'm Alan and I support the free plugin"
+msgstr ""
+
+#: PluginDonation.php:308
+msgid "for you.  You have been using the plugin for a while now and WordPress has probably been through several updates by now. So I'm asking if you can help keep this plugin free, by donating a very small amount of cash. If you can that would be a fantastic help to keeping this plugin updated."
+msgstr ""
+
+#: PluginDonation.php:309
+msgid "Donate via this page"
+msgstr ""
+
+#: PluginDonation.php:310
+msgid "Remind me later"
+msgstr ""
+
+#: PluginDonation.php:311
+msgid "I have already donated"
+msgstr ""
+
+#: PluginDonation.php:312
+msgid "I don't want to donate, dismiss this notice permanently"
+msgstr ""
+
+#: PluginDonation.php:313
+msgid "Hi I'm Alan and you have been using this plugin"
+msgstr ""
+
+#: PluginDonation.php:314
+msgid "for a while - that is awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help spread the word and boost my motivation.."
+msgstr ""
+
+#: PluginDonation.php:315
+msgid "OK, you deserve it"
+msgstr ""
+
+#: PluginDonation.php:316
+msgid "Maybe later"
+msgstr ""
+
+#: PluginDonation.php:317
+msgid "Already done"
+msgstr ""
+
+#: PluginDonation.php:318
+msgid "No thanks, dismiss this request"
+msgstr ""
+
+#: PluginDonation.php:319
+msgid "Donate to Support"
+msgstr ""
+
+#: PluginDonation.php:320
+msgid "Settings"
+msgstr ""
+
+#: PluginDonation.php:321
+msgid "Help Develop"
 msgstr ""
