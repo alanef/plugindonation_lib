@@ -111,7 +111,7 @@ class PluginDonation {
 	 *
 	 */
 	public function settings_link( $links ) {
-		$settings_link = '<a href="' . esc_url( $this->settings_url ) . '">' . esc_html($this->get_string( 35 )) . '</a>';
+		$settings_link = '<a href="' . esc_url( $this->settings_url ) . '">' . esc_html( $this->get_string( 35 ) ) . '</a>';
 		array_unshift(
 			$links,
 			$settings_link
@@ -120,11 +120,19 @@ class PluginDonation {
 		return $links;
 	}
 
+	private function get_string( $id ) {
+		if ( isset( $this->strings[ $id ] ) ) {
+			return $this->strings[ $id ];
+		}
+
+		return '??';
+	}
+
 	function plugin_meta( $links, $file ) {
 
 		if ( $this->plugin_file === $file ) {
 			$new_links = array(
-				'<a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q" target="_blank">' . esc_html($this->get_string( 34 )) . '</a>'
+				'<a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q" target="_blank">' . esc_html( $this->get_string( 34 ) ) . '</a>'
 			);
 
 			$links = array_merge( $links, $new_links );
@@ -272,58 +280,87 @@ EOT;
 		return in_array( $page, $display_on_pages );
 	}
 
-	private function get_string($id) {
-        if ( isset($this->strings[$id]) ){
-            return $this->strings[$id];
-        }
-        return '??';
+	public function set_strings() {
+		$this->strings = array(
+			esc_html__( 'Gift a Donation', 'plugin-donation-lib' ),
+			// 0
+			esc_html__( 'Hi, I\'m Alan and I built this free plugin to solve problems I had, and I hope it solves your problem too.', 'plugin-donation-lib' ),
+			// 1
+			esc_html__( 'It would really help me know that others find it useful and a great way of doing this is to gift me a small donation', 'plugin-donation-lib' ),
+			// 2
+			esc_html__( 'Gift a donation: select your desired option', 'plugin-donation-lib' ),
+			// 3
+			esc_html__( 'My Bitcoin donation wallet', 'plugin-donation-lib' ),
+			// 4
+			esc_html__( 'Gift a donation via PayPal', 'plugin-donation-lib' ),
+			// 5
+			esc_html__( 'My Bitcoin Cash address', 'plugin-donation-lib' ),
+			// 6
+			esc_html__( 'My Ethereum address', 'plugin-donation-lib' ),
+			// 7
+			esc_html__( 'My Dogecoin address', 'plugin-donation-lib' ),
+			// 8
+			esc_html__( 'Contribute', 'plugin-donation-lib' ),
+			// 9
+			esc_html__( 'Contribute to the Open Source Project in other ways', 'plugin-donation-lib' ),
+			// 10
+			esc_html__( 'Submit a review', 'plugin-donation-lib' ),
+			// 11
+			esc_html__( 'Translate to your language', 'plugin-donation-lib' ),
+			// 12
+			esc_html__( 'SUBMIT A REVIEW', 'plugin-donation-lib' ),
+			// 13
+			esc_html__( 'If you are happy with the plugin then we would love a review. Even if you are not so happy feedback is always useful, but if you have issues we would love you to make a support request first so we can try and help.', 'plugin-donation-lib' ),
+			// 14
+			esc_html__( 'SUPPORT FORUM', 'plugin-donation-lib' ),
+			// 15
+			esc_html__( 'Providing some translations for a plugin is very easy and can be done via the WordPress system. You can easily contribute to the community and you don\'t need to translate it all.', 'plugin-donation-lib' ),
+			// 16
+			esc_html__( 'TRANSLATE INTO YOUR LANGUAGE', 'plugin-donation-lib' ),
+			// 17
+			esc_html__( 'As an open source project you are welcome to contribute to the development of the software if you can. The development plugin is hosted on GitHub.', 'plugin-donation-lib' ),
+			// 18
+			esc_html__( 'CONTRIBUTE ON GITHUB', 'plugin-donation-lib' ),
+			// 19
+			esc_html__( 'Get Support', 'plugin-donation-lib' ),
+			// 20
+			esc_html__( 'WordPress SUPPORT FORUM', 'plugin-donation-lib' ),
+			// 21
+			esc_html__( 'Hi I\'m Alan and I support the free plugin', 'plugin-donation-lib' ),
+			// 22
+			esc_html__( 'for you.  You have been using the plugin for a while now and WordPress has probably been through several updates by now. So I\'m asking if you can help keep this plugin free, by donating a very small amount of cash. If you can that would be a fantastic help to keeping this plugin updated.', 'plugin-donation-lib' ),
+			// 23
+			esc_html__( 'Donate via this page', 'plugin-donation-lib' ),
+			// 24
+			esc_html__( 'Remind me later', 'plugin-donation-lib' ),
+			// 25
+			esc_html__( 'I have already donated', 'plugin-donation-lib' ),
+			// 26
+			esc_html__( 'I don\'t want to donate, dismiss this notice permanently', 'plugin-donation-lib' ),
+			// 27
+			esc_html__( 'Hi I\'m Alan and you have been using this plugin', 'plugin-donation-lib' ),
+			// 28
+			esc_html__( 'for a while - that is awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help spread the word and boost my motivation..', 'plugin-donation-lib' ),
+			// 29
+			esc_html__( 'OK, you deserve it', 'plugin-donation-lib' ),
+			// 30
+			esc_html__( 'Maybe later', 'plugin-donation-lib' ),
+			// 31
+			esc_html__( 'Already done', 'plugin-donation-lib' ),
+			// 32
+			esc_html__( 'No thanks, dismiss this request', 'plugin-donation-lib' ),
+			// 33
+			esc_html__( 'Donate to Support', 'plugin-donation-lib' ),
+			// 34
+			esc_html__( 'Settings', 'plugin-donation-lib' ),
+			// 35
+			esc_html__( 'Help Develop', 'plugin-donation-lib' ),
+			// 36
+		);
+
+		$this->strings = apply_filters( 'plugindonation_lib_strings_' . $this->plugin_slug, $this->strings );
+
 	}
-    
-
-    public function set_strings(){
-        $this->strings = array(
-	        esc_html__( 'Gift a Donation', 'plugin-donation-lib' ), // 0
-	        esc_html__( 'Hi, I\'m Alan and I built this free plugin to solve problems I had, and I hope it solves your problem too.', 'plugin-donation-lib' ), // 1
-	        esc_html__( 'It would really help me know that others find it useful and a great way of doing this is to gift me a small donation', 'plugin-donation-lib'), // 2
-	        esc_html__( 'Gift a donation: select your desired option', 'plugin-donation-lib' ), // 3
-	        esc_html__( 'My Bitcoin donation wallet', 'plugin-donation-lib' ), // 4
-	        esc_html__( 'Gift a donation via PayPal', 'plugin-donation-lib' ), // 5
-	        esc_html__( 'My Bitcoin Cash address', 'plugin-donation-lib' ),  // 6
-	        esc_html__( 'My Ethereum address', 'plugin-donation-lib' ), // 7
-	        esc_html__( 'My Dogecoin address', 'plugin-donation-lib' ), // 8
-	        esc_html__( 'Contribute', 'plugin-donation-lib' ), // 9
-	        esc_html__( 'Contribute to the Open Source Project in other ways', 'plugin-donation-lib' ), // 10
-	        esc_html__( 'Submit a review', 'plugin-donation-lib' ), // 11
-	        esc_html__( 'Translate to your language', 'plugin-donation-lib' ), // 12
-	        esc_html__( 'SUBMIT A REVIEW', 'plugin-donation-lib' ), // 13
-	        esc_html__( 'If you are happy with the plugin then we would love a review. Even if you are not so happy feedback is always useful, but if you have issues we would love you to make a support request first so we can try and help.', 'plugin-donation-lib' ), // 14
-	        esc_html__( 'SUPPORT FORUM', 'plugin-donation-lib' ), // 15
-	        esc_html__( 'Providing some translations for a plugin is very easy and can be done via the WordPress system. You can easily contribute to the community and you don\'t need to translate it all.', 'plugin-donation-lib' ), // 16
-	        esc_html__( 'TRANSLATE INTO YOUR LANGUAGE', 'plugin-donation-lib' ), // 17
-	        esc_html__( 'As an open source project you are welcome to contribute to the development of the software if you can. The development plugin is hosted on GitHub.', 'plugin-donation-lib' ), // 18
-	        esc_html__( 'CONTRIBUTE ON GITHUB', 'plugin-donation-lib' ), // 19
-	        esc_html__( 'Get Support', 'plugin-donation-lib' ), // 20
-	        esc_html__( 'WordPress SUPPORT FORUM', 'plugin-donation-lib' ), // 21
-	        esc_html__( 'Hi I\'m Alan and I support the free plugin', 'plugin-donation-lib' ), // 22
-	        esc_html__( 'for you.  You have been using the plugin for a while now and WordPress has probably been through several updates by now. So I\'m asking if you can help keep this plugin free, by donating a very small amount of cash. If you can that would be a fantastic help to keeping this plugin updated.', 'plugin-donation-lib' ), // 23
-	        esc_html__( 'Donate via this page', 'plugin-donation-lib' ), // 24
-	        esc_html__( 'Remind me later', 'plugin-donation-lib' ), // 25
-	        esc_html__( 'I have already donated', 'plugin-donation-lib' ), // 26
-	        esc_html__( 'I don\'t want to donate, dismiss this notice permanently', 'plugin-donation-lib' ), // 27
-	        esc_html__( 'Hi I\'m Alan and you have been using this plugin', 'plugin-donation-lib' ), // 28
-	        esc_html__( 'for a while - that is awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help spread the word and boost my motivation..', 'plugin-donation-lib' ), // 29
-	        esc_html__( 'OK, you deserve it', 'plugin-donation-lib' ), // 30
-	        esc_html__( 'Maybe later', 'plugin-donation-lib' ), // 31
-	        esc_html__( 'Already done', 'plugin-donation-lib' ), // 32
-	        esc_html__( 'No thanks, dismiss this request', 'plugin-donation-lib' ), // 33
-	        esc_html__( 'Donate to Support', 'plugin-donation-lib' ), // 34
-	        esc_html__( 'Settings', 'plugin-donation-lib' ), // 35
-	        esc_html__( 'Help Develop', 'plugin-donation-lib' ), // 36
-        );
-
-        $this->strings = apply_filters('plugindonation_lib_strings', $this->strings);
-
-    }
 
 	/**
 	 * @since 1.0
@@ -331,16 +368,16 @@ EOT;
 	public function display() {
 		?>
         <tr valign="top">
-            <th scope="row"><?php  echo esc_html($this->get_string( 0 )); ?></th>
+            <th scope="row"><?php echo esc_html( $this->get_string( 0 ) ); ?></th>
             <td>
                 <p>
-					<?php echo esc_html($this->get_string( 1 )); ?>
+					<?php echo esc_html( $this->get_string( 1 ) ); ?>
                 </p>
                 <p>
-					<?php echo esc_html($this->get_string( 2 )); ?>
+					<?php echo esc_html( $this->get_string( 2 ) ); ?>
                 </p>
                 <h3>
-					<?php echo esc_html($this->get_string( 3 )); ?>
+					<?php echo esc_html( $this->get_string( 3 ) ); ?>
                 </h3>
                 <!-- Tab links -->
                 <div class="tab">
@@ -370,7 +407,7 @@ EOT;
                             <img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BTC.png'; ?>">
                         </div>
                         <div>
-							<?php echo esc_html($this->get_string( 4 )); ?><br><br> <strong><a
+							<?php echo esc_html( $this->get_string( 4 ) ); ?><br><br> <strong><a
                                         href="https://www.blockchain.com/btc/address/bc1q04zt3yxxu282ayg3aev633twpqtw0dzzetp78x">bc1q04zt3yxxu282ayg3aev633twpqtw0dzzetp78x</a></strong>
                         </div>
                         <div>
@@ -384,7 +421,7 @@ EOT;
                                                      src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/PP.png'; ?>">
                             </a></div>
                         <div><a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q"
-                                target="_blank"><?php echo esc_html($this->get_string( 5 )); ?>
+                                target="_blank"><?php echo esc_html( $this->get_string( 5 ) ); ?>
                             </a></div>
                         <div><a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q"
                                 target="_blank"><img height="48"
@@ -395,7 +432,7 @@ EOT;
                         <div><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BCH.png'; ?>">
                         </div>
                         <div>
-							<?php echo esc_html($this->get_string( 6 )); ?><br><br><strong>bitcoincash:qpmn76wad2mwfhk3c9vhx77ex5nqhq2r0ursp8z6mp</strong>
+							<?php echo esc_html( $this->get_string( 6 ) ); ?><br><br><strong>bitcoincash:qpmn76wad2mwfhk3c9vhx77ex5nqhq2r0ursp8z6mp</strong>
                         </div>
                         <div>
                             <img height="140"
@@ -407,7 +444,7 @@ EOT;
                         <div><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/ETH.png'; ?>">
                         </div>
                         <div>
-							<?php echo esc_html($this->get_string( 7 )); ?><br><br><strong>0x492Bdf65bcB65bC067Ab3886e9B79a7CDe9021BB</strong>
+							<?php echo esc_html( $this->get_string( 7 ) ); ?><br><br><strong>0x492Bdf65bcB65bC067Ab3886e9B79a7CDe9021BB</strong>
                         </div>
                         <div>
                             <img height="140"
@@ -418,7 +455,7 @@ EOT;
                         <h3><img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/DOGE.png'; ?>">Dogecoin
                         </h3>
                         <div>
-							<?php echo esc_html($this->get_string( 8 )); ?><br><br><strong>D7nB2HsBxNPACis9fSgjqTShe4JfSztAjr</strong>
+							<?php echo esc_html( $this->get_string( 8 ) ); ?><br><br><strong>D7nB2HsBxNPACis9fSgjqTShe4JfSztAjr</strong>
                         </div>
                         <div>
                             <img height="140"
@@ -429,21 +466,21 @@ EOT;
             </td>
         </tr>
         <tr valign="top">
-            <th scope="row"><?php echo esc_html($this->get_string( 9 )); ?></th>
+            <th scope="row"><?php echo esc_html( $this->get_string( 9 ) ); ?></th>
             <td>
                 <h3>
-					<?php echo esc_html($this->get_string( 10 )); ?>
+					<?php echo esc_html( $this->get_string( 10 ) ); ?>
                 </h3>
                 <!-- Tab links -->
                 <div class="tab">
                     <button class="tablinks" onclick="openPDLTab(event, 'review-tab')"><img height="32"
-                                                                                            src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/reviews.png'; ?>"><br><?php echo esc_html($this->get_string( 11 )); ?>
+                                                                                            src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/reviews.png'; ?>"><br><?php echo esc_html( $this->get_string( 11 ) ); ?>
                     </button>
                     <button class="tablinks" onclick="openPDLTab(event, 'translate-tab')"><img height="32"
-                                                                                               src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/translate.png'; ?>"><br><?php echo esc_html($this->get_string( 12 )); ?>
+                                                                                               src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/translate.png'; ?>"><br><?php echo esc_html( $this->get_string( 12 ) ); ?>
                     </button>
                     <button class="tablinks" onclick="openPDLTab(event, 'github-tab')"><img height="32"
-                                                                                            src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/github.png'; ?>"><br><?php echo esc_html($this->get_string( 36 )); ?>
+                                                                                            src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/github.png'; ?>"><br><?php echo esc_html( $this->get_string( 36 ) ); ?>
                     </button>
                 </div>
                 <!-- Tab content -->
@@ -452,15 +489,15 @@ EOT;
                         <div>
                             <a class="button-secondary"
                                href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/reviews/?view=all#new-post"
-                               target="_blank"><?php echo esc_html($this->get_string( 13 )); ?></a>
+                               target="_blank"><?php echo esc_html( $this->get_string( 13 ) ); ?></a>
                         </div>
                         <div>
-                            <p><?php echo esc_html($this->get_string( 14 )); ?></p>
+                            <p><?php echo esc_html( $this->get_string( 14 ) ); ?></p>
                         </div>
                         <div>
                             <a class="button-secondary"
                                href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/"
-                               target="_blank"><?php echo esc_html($this->get_string( 15 )); ?></a>
+                               target="_blank"><?php echo esc_html( $this->get_string( 15 ) ); ?></a>
                         </div>
                     </div>
                     <div id="translate-tab" class="tabcontent">
@@ -470,11 +507,11 @@ EOT;
                                                     src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/translate.png'; ?>">
                             </a></div>
                         <div>
-                            <p><?php echo esc_html($this->get_string( 16 ));?> </p>
+                            <p><?php echo esc_html( $this->get_string( 16 ) ); ?> </p>
                         </div>
                         <div><a class="button-secondary"
                                 href="https://translate.wordpress.org/projects/wp-plugins/<?php echo esc_attr( $this->plugin_slug ); ?>/"
-                                target="_blank"><?php echo esc_html($this->get_string( 17 )); ?></a>
+                                target="_blank"><?php echo esc_html( $this->get_string( 17 ) ); ?></a>
                         </div>
                     </div>
                     <div id="github-tab" class="tabcontent">
@@ -483,12 +520,12 @@ EOT;
                                                      src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/github.png'; ?>"></a>
                         </div>
                         <div>
-                            <p><?php echo esc_html($this->get_string( 18 )); ?></p>
+                            <p><?php echo esc_html( $this->get_string( 18 ) ); ?></p>
                         </div>
                         <div>
                             <a class="button-secondary"
                                href="https://github.com/alanef/<?php echo esc_attr( $this->plugin_slug ); ?>/"
-                               target="_blank"><?php echo esc_html($this->get_string( 19 )); ?></a>
+                               target="_blank"><?php echo esc_html( $this->get_string( 19 ) ); ?></a>
                         </div>
                     </div>
 
@@ -496,11 +533,11 @@ EOT;
             </td>
         </tr>
         <tr valign="top">
-            <th scope="row"><?php echo esc_html($this->get_string( 20 )); ?></th>
+            <th scope="row"><?php echo esc_html( $this->get_string( 20 ) ); ?></th>
             <td>
                 <a class="button-secondary"
                    href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/"
-                   target="_blank"><?php echo esc_html($this->get_string( 21 )); ?></a>
+                   target="_blank"><?php echo esc_html( $this->get_string( 21 ) ); ?></a>
             </td>
         </tr>
 		<?php
@@ -520,7 +557,7 @@ EOT;
 			return;
 		}
 		$user_id       = get_current_user_id();
-		$um            = get_user_meta( $user_id, $this->plugin_slug . '_pdlib_dismissed_notices', true );
+		$um            = get_user_meta( $user_id, 'pdlib_dismissed_notices', true );
 		$notice_donate = $this->plugin_slug . '_pdlib_notice_donate';
 		if ( ! isset( $um[ $notice_donate ] ) || true !== $um[ $notice_donate ] ) {
 			$donate = get_option( $this->plugin_slug . '_donate' );
@@ -530,19 +567,19 @@ EOT;
                      class="pdl_notice notice is-dismissible notice-warning">
                     <p>
 						<?php
-						echo esc_html($this->get_string( 22 )) .
+						echo esc_html( $this->get_string( 22 ) ) .
 						     ' <strong>' . esc_html( $this->title ) .
-						     '</strong> ' . esc_html($this->get_string( 23 ));
+						     '</strong> ' . esc_html( $this->get_string( 23 ) );
 						?>
                     </p>
                     <p>
-                        <a href="<?php echo esc_attr( $this->settings_url ); ?>"><?php echo esc_html($this->get_string( 24 )); ?></a>
+                        <a href="<?php echo esc_attr( $this->settings_url ); ?>"><?php echo esc_html( $this->get_string( 24 ) ); ?></a>
                     </p>
-                    <p><a class="remind" href=""><?php echo esc_html($this->get_string( 25 )); ?></a></p>
+                    <p><a class="remind" href=""><?php echo esc_html( $this->get_string( 25 ) ); ?></a></p>
                     <p><a class="dismiss"
-                          href=""><?php echo esc_html($this->get_string( 26 )); ?></a></p>
+                          href=""><?php echo esc_html( $this->get_string( 26 ) ); ?></a></p>
                     <p><a class="dismiss"
-                          href=""><?php echo esc_html($this->get_string( 27 )); ?></a>
+                          href=""><?php echo esc_html( $this->get_string( 27 ) ); ?></a>
                     </p>
                 </div>
 				<?php
@@ -557,20 +594,20 @@ EOT;
                      class="pdl_notice notice is-dismissible notice-sucess">
                     <p>
 						<?php
-						echo esc_html($this->get_string( 28 )) .
+						echo esc_html( $this->get_string( 28 ) ) .
 						     ' <strong>' . esc_html( $this->title ) .
-						     '</strong> ' . esc_html($this->get_string( 29 ));
+						     '</strong> ' . esc_html( $this->get_string( 29 ) );
 						?>
                     </p>
                     <p>
                         <a target="_blank"
-                           href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/reviews/?view=all#new-post"><?php echo esc_html($this->get_string( 30 )); ?></a>
+                           href="https://wordpress.org/support/plugin/<?php echo esc_attr( $this->plugin_slug ); ?>/reviews/?view=all#new-post"><?php echo esc_html( $this->get_string( 30 ) ); ?></a>
                     </p>
-                    <p><a class="remind" href=""><?php echo esc_html($this->get_string( 31 )); ?></a></p>
+                    <p><a class="remind" href=""><?php echo esc_html( $this->get_string( 31 ) ); ?></a></p>
                     <p><a class="dismiss"
-                          href=""><?php echo esc_html($this->get_string( 32 )); ?></a></p>
+                          href=""><?php echo esc_html( $this->get_string( 32 ) ); ?></a></p>
                     <p><a class="dismiss"
-                          href=""><?php echo esc_html($this->get_string( 33 )); ?></a>
+                          href=""><?php echo esc_html( $this->get_string( 33 ) ); ?></a>
                     </p>
                 </div>
 				<?php
@@ -586,12 +623,18 @@ EOT;
 			return;
 		}
 		$user_id = get_current_user_id();
-		$um      = get_user_meta( $user_id, $this->plugin_slug . '_pdlib_dismissed_notices', true );
+		/* handle issue of old version */
+		$legacy = get_user_meta( $user_id, 'stop-user-enumeration_pdlib_dismissed_notices', true );
+		if ( ! empty( $legacy ) ) {
+			update_user_meta( $user_id, 'pdlib_dismissed_notices', $legacy );
+			delete_user_meta( $user_id, 'stop-user-enumeration_pdlib_dismissed_notices' );
+		}
+		$um = get_user_meta( $user_id, 'pdlib_dismissed_notices', true );
 		if ( ! is_array( $um ) ) {
 			$um = array();
 		}
 		$um[ sanitize_text_field( $_POST['id'] ) ] = true;
-		update_user_meta( $user_id, $this->plugin_slug . '_pdlib_dismissed_notices', $um );
+		update_user_meta( $user_id, 'pdlib_dismissed_notices', $um );
 		wp_die();
 	}
 
