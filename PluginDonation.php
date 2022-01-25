@@ -624,11 +624,22 @@ EOT;
 		}
 		$user_id = get_current_user_id();
 		/* handle issue of old version */
-		$legacy = get_user_meta( $user_id, 'stop-user-enumeration_pdlib_dismissed_notices', true );
-		if ( ! empty( $legacy ) ) {
-			update_user_meta( $user_id, 'pdlib_dismissed_notices', $legacy );
-			delete_user_meta( $user_id, 'stop-user-enumeration_pdlib_dismissed_notices' );
-		}
+        $slugs =array(
+	        'stop-user-enumeration',
+            'clean-and-simple-contact-form-by-meg-nicholas',
+            'redirect-404-error-page-to-homepage-or-custom-page',
+            'simple-google-maps-short-code',
+	        'stop-wp-emails-going-to-spam',
+        );
+        foreach( $slugs as $slug) {
+	        $legacy = get_user_meta( $user_id, $slug .'_pdlib_dismissed_notices', true );
+	        if ( ! empty( $legacy ) ) {
+		        update_user_meta( $user_id, 'pdlib_dismissed_notices', $legacy );
+		        delete_user_meta( $user_id, $slug .'_pdlib_dismissed_notices' );
+                break;
+	        }
+        }
+        /* end of tidy up */
 		$um = get_user_meta( $user_id, 'pdlib_dismissed_notices', true );
 		if ( ! is_array( $um ) ) {
 			$um = array();
