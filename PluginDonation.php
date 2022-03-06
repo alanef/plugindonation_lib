@@ -367,6 +367,9 @@ EOT;
 	 * @since 1.0
 	 */
 	public function display() {
+		if ( $this->freemius !== null &&  ! $this->freemius->is_free_plan() ) {
+            return;
+		}
 		?>
         <tr valign="top">
             <th scope="row"><?php echo esc_html( $this->get_string( 0 ) ); ?></th>
@@ -548,6 +551,9 @@ EOT;
 	 * @since 1.0
 	 */
 	public function display_admin_notice() {
+        if ( $this->freemius !== null && ! $this->freemius->is_free_plan() ) {
+            return;
+        }
 		$this->set_timers();
 		// Don't display notices to users that can't do anything about it.
 		if ( ! current_user_can( 'install_plugins' ) ) {
