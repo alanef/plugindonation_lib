@@ -1,6 +1,6 @@
 <?php
 /*
- *  @version 1.2
+ *  @version 1.3
  *  @licence GPL2 or Later
  *  @copyright Alan Fuller
  */
@@ -41,12 +41,13 @@ class PluginDonation {
 	 *
 	 * @since 1.0
 	 */
-	public function __construct( $plugin_slug, $settings_hook, $plugin_file, $settings_url, $title ) {
+	public function __construct( $plugin_slug, $settings_hook, $plugin_file, $settings_url, $title, $freemius = null ) {
 		$this->plugin_slug   = $plugin_slug;
 		$this->settings_hook = $settings_hook;
 		$this->plugin_file   = $plugin_file;
 		$this->settings_url  = $settings_url;
 		$this->title         = $title;
+		$this->freemius      = $freemius;
 		$this->hooks();
 	}
 
