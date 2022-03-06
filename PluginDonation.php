@@ -1,6 +1,6 @@
 <?php
 /*
- *  @version 1.1
+ *  @version 1.2
  *  @licence GPL2 or Later
  *  @copyright Alan Fuller
  */
