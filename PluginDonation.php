@@ -1,6 +1,6 @@
 <?php
 /*
- *  @version 1.3
+ *  @version 1.4
  *  @licence GPL2 or Later
  *  @copyright Alan Fuller
  */
@@ -133,7 +133,7 @@ class PluginDonation {
 
 		if ( $this->plugin_file === $file ) {
 			$new_links = array(
-				'<a href="https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q" target="_blank">' . esc_html( $this->get_string( 34 ) ) . '</a>'
+				'<a href="https://www.buymeacoffee.com/wpdevalan" target="_blank">' . esc_html( $this->get_string( 34 ) ) . '</a>'
 			);
 
 			$links = array_merge( $links, $new_links );
@@ -357,6 +357,11 @@ EOT;
 			// 35
 			esc_html__( 'Help Develop', 'plugin-donation-lib' ),
 			// 36
+			/**
+			 * @since 1.4
+			 */
+			esc_html__( 'Buy Me a Coffee makes supporting fun and easy. In just a couple of taps, you can donate (buy me a coffee) and leave a message. You don’t even have to create an account!', 'plugin-donation-lib' ),
+			// 37
 		);
 
 		$this->strings = apply_filters( 'plugindonation_lib_strings_' . $this->plugin_slug, $this->strings );
@@ -385,6 +390,9 @@ EOT;
                 </h3>
                 <!-- Tab links -->
                 <div class="tab">
+                    <button class="tablinks" onclick="openPDLTab(event, 'BMAC')"><img height="32"
+                                                                                     src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BMAC.svg'; ?>">
+                    </button>
                     <button class="tablinks" onclick="openPDLTab(event, 'BTC')"><img height="32"
                                                                                      src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BTC.png'; ?>">
                     </button>
@@ -406,6 +414,19 @@ EOT;
 
                 <!-- Tab content -->
                 <div class="tabcontentwrap">
+                    <div id="BMAC" class="tabcontent">
+                        <div>
+                            <img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BMAC.svg'; ?>">
+                        </div>
+                        <div>
+			                <?php echo esc_html( $this->get_string( 37 ) ); ?><br><br> <strong><a
+                                        href="https://www.buymeacoffee.com/wpdevalan">https://www.buymeacoffee.com/wpdevalan</a></strong>
+                        </div>
+                        <div>
+                            <img height="140"
+                                 src="<?php echo plugin_dir_url( __FILE__ ) . 'images/QRcodes/BMAC.png'; ?>">
+                        </div>
+                    </div>
                     <div id="BTC" class="tabcontent">
                         <div>
                             <img height="48" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/logos/BTC.png'; ?>">
